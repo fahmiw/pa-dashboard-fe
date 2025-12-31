@@ -9,6 +9,10 @@ export const AppProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const [isAdmin, setIsAdmin] = useState(null);
   const [isSAdmin, setIsSAdmin] = useState(null);
+  
+  // --- TAMBAHAN BARU UNTUK SIDEBAR ---
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false); 
+
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -29,6 +33,7 @@ export const AppProvider = ({ children }) => {
   const handleChangeMenu = (value) => {
     setMenuName(value);
   };
+  
   useEffect(() => {
     if (userData) {
       if (userData?.role === "admin") {
@@ -67,6 +72,9 @@ export const AppProvider = ({ children }) => {
         LoadUser,
         isAdmin,
         isSAdmin,
+        // --- JANGAN LUPA EXPORT DI SINI ---
+        mobileMenuOpen, 
+        setMobileMenuOpen 
       }}
     >
       {children}

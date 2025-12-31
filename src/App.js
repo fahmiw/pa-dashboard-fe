@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
-import AppLayout from "./layouts/AppLayout";
+import AppLayout from "./Layouts/AppLayout";
 import ListSatuanKerjaPage from "./pages/ListSatuankerja";
 import { ToastContainer } from "react-toastify";
 import CompilationPage from "./pages/Compilation";
@@ -19,16 +19,22 @@ import IkpaPage from "./pages/Ikpa";
 import PTUKSub1Page from "./pages/PTUKSub1";
 import MainDashboard from "./pages/MainDashboard";
 import BudgetExecution from "./pages/BudgetExecution";
-import StateProperty from "./pages/StateProperty";
 import TandaTerimaPage from "./pages/TandaTerima";
-import Administrator from "./pages/Administrator";
+import TataUsaha from "./pages/TataUsaha";
 import RealisasiPage from "./pages/Realisasi";
-import ReportingAccounting from "./pages/ReportingAccounting";
+import ReportingAccounting from "./pages/AkuntansiPelaporan";
 import LLATPage from "./pages/LLAT";
-// import "@/PDFWorkerSetup";
+import Helpdesk from "./pages/Helpdesk"; 
+import StrukturOrganisasi from "./pages/StrukturOrganisasi";
+
+// --- IMPORT SUB-PAGE BARANG MILIK NEGARA ---
+import StatusPSP from "./pages/BarangMilikNegara/StatusPSP"; 
+import KondisiAset from "./pages/BarangMilikNegara/KondisiAset"; 
+// PERUBAHAN: Import disesuaikan dengan nama file baru
+import JumlahJenisBMN from "./pages/BarangMilikNegara/JumlahJenisBMN";
 
 function App() {
-  const { isAdmin, listMenu, userData } = useContext(AppContext);
+  const { isAdmin, listMenu } = useContext(AppContext);
   const token = localStorage.getItem("token");
 
   return (
@@ -69,26 +75,90 @@ function App() {
             </PrivateRoute>
           }
         />
+
+        {/* === GROUP BARANG MILIK NEGARA (Updated) === */}
+        
+        {/* 1. Redirect Route Utama ke Sub-Page Pertama (Status PSP) */}
         <Route
           path="/barang-milik-negara"
+          element={<Navigate to="/barang-milik-negara/status-psp" replace />}
+        />
+        
+        {/* 2. Sub-Page: Status PSP */}
+        <Route
+          path="/barang-milik-negara/status-psp"
           element={
             <PrivateRoute>
               <AppLayout isAdmin={isAdmin}>
-                <StateProperty />
+                <StatusPSP />
               </AppLayout>
             </PrivateRoute>
           }
         />
+
+        {/* 3. Sub-Page: Kondisi Aset */}
+        <Route
+          path="/barang-milik-negara/kondisi-aset"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <KondisiAset />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+
+        {/* 4. Sub-Page: Jumlah Jenis BMN */}
+        <Route
+          path="/barang-milik-negara/jumlah-jenis"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                {/* Panggil Component dengan nama baru */}
+                <JumlahJenisBMN />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        {/* =========================================== */}
+        
+        {/* 1. Tata Usaha */}
         <Route
           path="/tata-usaha"
           element={
             <PrivateRoute>
               <AppLayout isAdmin={isAdmin}>
-                <Administrator />
+                <TataUsaha />
               </AppLayout>
             </PrivateRoute>
           }
         />
+
+        {/* 2. Struktur Organisasi */}
+        <Route
+          path="/dashboard/struktur-organisasi"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <StrukturOrganisasi />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+
+        {/* 3. Helpdesk */}
+        <Route
+          path="/dashboard/helpdesk"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <Helpdesk />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+
+        {/* === DYNAMIC ROUTES (Menu List) === */}
         {listMenu.map((data) => (
           <Route
             key={data?.id}
@@ -130,6 +200,8 @@ function App() {
             }
           />
         ))}
+
+        {/* === MENU LAINNYA === */}
         <Route
           path="/compilation"
           element={
@@ -170,6 +242,8 @@ function App() {
             </PrivateRoute>
           }
         />
+
+        {/* === ROUTE DINAMIS DASHBOARD (Catch-All) === */}
         <Route
           path="/dashboard/:subPage"
           element={
@@ -180,6 +254,7 @@ function App() {
             </PrivateRoute>
           }
         />
+
         <Route
           path="/dashboard-management"
           element={
