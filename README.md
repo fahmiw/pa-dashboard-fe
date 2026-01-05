@@ -207,3 +207,153 @@ pa-dashboard-fe
 └─ tailwind.config.js
 
 ```
+```
+pa-dashboard-fe
+├─ craco.config.js
+├─ jsconfig.json
+├─ pa-dashboard-fe.zip
+├─ package-lock.json
+├─ package.json
+├─ public
+│  ├─ background-ver1.jpg
+│  ├─ favicon.ico
+│  ├─ fonts
+│  │  ├─ FunnelDisplay-Bold.ttf
+│  │  ├─ FunnelDisplay-ExtraBold.ttf
+│  │  ├─ FunnelDisplay-Light.ttf
+│  │  ├─ FunnelDisplay-Medium.ttf
+│  │  ├─ FunnelDisplay-Regular.ttf
+│  │  └─ FunnelDisplay-SemiBold.ttf
+│  ├─ icon-1.png
+│  ├─ index.html
+│  ├─ kemnaker-logo-bg.png
+│  ├─ login-background-2.jpg
+│  ├─ logo-kemnaker-ori.png
+│  ├─ logo-kemnaker-sidebar.png
+│  ├─ logo-kemnaker.png
+│  ├─ Logo.png
+│  ├─ manifest.json
+│  ├─ pdf-tester.pdf
+│  ├─ robots.txt
+│  ├─ rokeu-bmn.png
+│  ├─ trophy-black.png
+│  ├─ trophy-gold.png
+│  ├─ trophy-silver.png
+│  └─ under-construct.gif
+├─ README.md
+├─ src
+│  ├─ App.css
+│  ├─ App.js
+│  ├─ App.test.js
+│  ├─ components
+│  │  ├─ Breadcrumbs.jsx
+│  │  ├─ Button.jsx
+│  │  ├─ Card.jsx
+│  │  ├─ Chip.jsx
+│  │  ├─ DatePickerInput.jsx
+│  │  ├─ Dialog.jsx
+│  │  ├─ FileInput.jsx
+│  │  ├─ Input.jsx
+│  │  ├─ Modal.jsx
+│  │  ├─ MultiSelect.jsx
+│  │  ├─ Navbar.jsx
+│  │  ├─ Paper.jsx
+│  │  ├─ PDFViewer.jsx
+│  │  ├─ PrivateRoute.jsx
+│  │  ├─ Select.jsx
+│  │  ├─ Sidebar.jsx
+│  │  ├─ Table.jsx
+│  │  ├─ TableBody.jsx
+│  │  ├─ TableCell.jsx
+│  │  ├─ TableHeader.jsx
+│  │  ├─ TablePagination.jsx
+│  │  ├─ TableRow.jsx
+│  │  ├─ TableSortLabel.jsx
+│  │  ├─ TextArea.jsx
+│  │  ├─ Title.jsx
+│  │  └─ User.jsx
+│  ├─ constants
+│  │  └─ color.jsx
+│  ├─ contexts
+│  │  ├─ AppContext.js
+│  │  └─ AuthContexts.js
+│  ├─ index.css
+│  ├─ index.js
+│  ├─ Layouts
+│  │  └─ AppLayout.js
+│  ├─ logo.svg
+│  ├─ pages
+│  │  ├─ AkuntansiPelaporan
+│  │  │  ├─ BarChart.jsx
+│  │  │  ├─ BarChartLo.jsx
+│  │  │  ├─ BarChartLPE.jsx
+│  │  │  ├─ BarChartNeraca.jsx
+│  │  │  └─ index.js
+│  │  ├─ BarangMilikNegara
+│  │  │  ├─ components
+│  │  │  │  ├─ BarChart.jsx
+│  │  │  │  ├─ constants.jsx
+│  │  │  │  ├─ DonutChart.jsx
+│  │  │  │  └─ Table.jsx
+│  │  │  ├─ JumlahJenisBMN.js
+│  │  │  ├─ KondisiAset.js
+│  │  │  └─ StatusPSP.js
+│  │  ├─ BudgetExecution
+│  │  │  ├─ BarChart.jsx
+│  │  │  ├─ constants.jsx
+│  │  │  ├─ GaugeChart.jsx
+│  │  │  ├─ index.js
+│  │  │  ├─ TableBudgetExecution.jsx
+│  │  │  └─ useBudgetExecution.jsx
+│  │  ├─ Compilation
+│  │  │  └─ index.js
+│  │  ├─ Dashboard
+│  │  │  └─ index.js
+│  │  ├─ DashboardManagement
+│  │  │  └─ index.js
+│  │  ├─ Helpdesk
+│  │  │  └─ index.js
+│  │  ├─ Ikpa
+│  │  │  └─ index.js
+│  │  ├─ ListSatuankerja
+│  │  │  ├─ index.js
+│  │  │  ├─ pendingDocumentsModal.js
+│  │  │  └─ satkerHooks.js
+│  │  ├─ LLAT
+│  │  │  └─ index.js
+│  │  ├─ LoginPage.js
+│  │  ├─ MainDashboard
+│  │  │  ├─ BarChart.jsx
+│  │  │  ├─ BarChartIPA.jsx
+│  │  │  ├─ DonutChart.jsx
+│  │  │  ├─ DonutChartAkuntansi.jsx
+│  │  │  └─ index.js
+│  │  ├─ Menu
+│  │  │  ├─ index.js
+│  │  │  └─ menuHooks.js
+│  │  ├─ PTUKSub1
+│  │  │  └─ index.js
+│  │  ├─ Realisasi
+│  │  │  └─ index.js
+│  │  ├─ Soon
+│  │  │  └─ index.js
+│  │  ├─ StrukturOrganisasi
+│  │  │  └─ index.js
+│  │  ├─ TandaTerima
+│  │  │  └─ index.js
+│  │  ├─ TataUsaha
+│  │  │  ├─ BarChart.jsx
+│  │  │  ├─ constants.jsx
+│  │  │  ├─ DonutChart.jsx
+│  │  │  └─ index.js
+│  │  └─ UserManagement
+│  │     └─ index.js
+│  ├─ reportWebVitals.js
+│  ├─ services
+│  │  ├─ APIHelper.js
+│  │  ├─ FetchHelper.js
+│  │  └─ GeneralHelper.js
+│  └─ setupTests.js
+└─ tailwind.config.js
+
+```

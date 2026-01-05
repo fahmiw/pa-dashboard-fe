@@ -16,7 +16,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import DashboardPage from "./pages/Dashboard";
 import DashboardManagementPage from "./pages/DashboardManagement";
 import IkpaPage from "./pages/Ikpa";
-import PTUKSub1Page from "./pages/PTUKSub1";
+import PTUKSub1Page from "./pages/PTUKSub1"; // (Mungkin ini 'Tuntutan Ganti Rugi' lama, saya biarkan dulu)
 import MainDashboard from "./pages/MainDashboard";
 import BudgetExecution from "./pages/BudgetExecution";
 import TandaTerimaPage from "./pages/TandaTerima";
@@ -30,8 +30,14 @@ import StrukturOrganisasi from "./pages/StrukturOrganisasi";
 // --- IMPORT SUB-PAGE BARANG MILIK NEGARA ---
 import StatusPSP from "./pages/BarangMilikNegara/StatusPSP"; 
 import KondisiAset from "./pages/BarangMilikNegara/KondisiAset"; 
-// PERUBAHAN: Import disesuaikan dengan nama file baru
 import JumlahJenisBMN from "./pages/BarangMilikNegara/JumlahJenisBMN";
+
+// --- IMPORT SUB-PAGE PTUK (BARU) ---
+import PTUKDashboard from "./pages/PTUK/Dashboard";
+import LHPKementrian from "./pages/PTUK/LHP";
+import KerugianNegara from "./pages/PTUK/KerugianNegara";
+import PNBP from "./pages/PTUK/PNBP";
+import PengelolaKeuangan from "./pages/PTUK/PengelolaKeuangan";
 
 function App() {
   const { isAdmin, listMenu } = useContext(AppContext);
@@ -45,16 +51,8 @@ function App() {
           path="/"
           element={token ? <Navigate to="/dashboard" /> : <LoginPage />}
         />
-        <Route
-          path="/satuan-kerja"
-          element={
-            <PrivateRoute>
-              <AppLayout isAdmin={isAdmin}>
-                <MenuPage />
-              </AppLayout>
-            </PrivateRoute>
-          }
-        />
+        
+        {/* === DASHBOARD UTAMA === */}
         <Route
           path="/dashboard-utama"
           element={
@@ -65,6 +63,91 @@ function App() {
             </PrivateRoute>
           }
         />
+
+        {/* === GROUP PTUK (UPDATED) === */}
+        {/* 1. Dashboard PTUK */}
+        <Route
+          path="/ptuk" // Akses /ptuk langsung ke dashboard
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <PTUKDashboard />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/ptuk/dashboard" // Akses eksplisit
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <PTUKDashboard />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+
+        {/* 2. LHP Kementrian */}
+        <Route
+          path="/ptuk/lhp" // Sesuaikan path ini dengan menuHooks/Sidebar
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <LHPKementrian />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+
+        {/* 3. Kerugian Negara */}
+        <Route
+          path="/ptuk/kerugian-negara"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <KerugianNegara />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+
+        {/* 4. PNBP */}
+        <Route
+          path="/ptuk/pnbp"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <PNBP />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+
+        {/* 5. Pengelola Keuangan */}
+        <Route
+          path="/ptuk/pengelola-keuangan"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <PengelolaKeuangan />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        {/* =========================================== */}
+
+
+        <Route
+          path="/satuan-kerja"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <MenuPage />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        
         <Route
           path="/pelaksanaan-anggaran"
           element={
@@ -76,15 +159,11 @@ function App() {
           }
         />
 
-        {/* === GROUP BARANG MILIK NEGARA (Updated) === */}
-        
-        {/* 1. Redirect Route Utama ke Sub-Page Pertama (Status PSP) */}
+        {/* === GROUP BARANG MILIK NEGARA === */}
         <Route
           path="/barang-milik-negara"
           element={<Navigate to="/barang-milik-negara/status-psp" replace />}
         />
-        
-        {/* 2. Sub-Page: Status PSP */}
         <Route
           path="/barang-milik-negara/status-psp"
           element={
@@ -95,8 +174,6 @@ function App() {
             </PrivateRoute>
           }
         />
-
-        {/* 3. Sub-Page: Kondisi Aset */}
         <Route
           path="/barang-milik-negara/kondisi-aset"
           element={
@@ -107,20 +184,16 @@ function App() {
             </PrivateRoute>
           }
         />
-
-        {/* 4. Sub-Page: Jumlah Jenis BMN */}
         <Route
           path="/barang-milik-negara/jumlah-jenis"
           element={
             <PrivateRoute>
               <AppLayout isAdmin={isAdmin}>
-                {/* Panggil Component dengan nama baru */}
                 <JumlahJenisBMN />
               </AppLayout>
             </PrivateRoute>
           }
         />
-        {/* =========================================== */}
         
         {/* 1. Tata Usaha */}
         <Route
@@ -315,6 +388,8 @@ function App() {
             </PrivateRoute>
           }
         />
+        
+        {/* Route Lama (PTUK Tuntutan Ganti Rugi) - Bisa dihapus jika sudah tidak dipakai */}
         <Route
           path="/ptuk/tuntutan-ganti-rugi"
           element={
