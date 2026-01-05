@@ -6,8 +6,9 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 function PTUKSub1Page() {
   return (
     <div>
-      <Breadcrumbs items={[{ name: "Dashboard Utama", path: "/dashboard" }]} />
-      <Title>Tuntutan Ganti Rugi</Title>
+      <div className="flex justify-between items-center px-4 md:px-4 border-b border-gray-100 z-20 bg-white shrink-0 pl-20 md:pl-8 transition-all">
+        <Title>Tuntutan Ganti Rugi</Title>
+      </div>
       <Paper elevation={3} style={{ backgroundColor: "#F5F6F7" }}>
         <div
           style={{

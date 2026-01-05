@@ -67,14 +67,6 @@ function KondisiAset() {
   return (
     <div className="bg-gray-50 min-h-screen font-sans p-4 md:p-8">
       
-      {/* 1. HAMBURGER MENU (MOBILE ONLY) */}
-      <button 
-          onClick={() => setMobileMenuOpen(prev => !prev)}
-          className="fixed top-4 left-4 z-50 p-2.5 bg-white/90 backdrop-blur-sm rounded-xl shadow-md border border-gray-100 text-gray-600 hover:bg-gray-50 active:scale-95 active:bg-gray-200 transition-all cursor-pointer md:hidden"
-      >
-          <Menu size={24} />
-      </button>
-
       {/* HEADER PAGE (Padding left mobile untuk menghindari tombol menu) */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 md:gap-0 pl-14 md:pl-0">
         <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">

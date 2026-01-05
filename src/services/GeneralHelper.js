@@ -161,6 +161,7 @@ export const isAuthorizedRoute = (pathname, userData, menus = []) => {
     if (pathname.startsWith("/tata-usaha")) return true;
     if (pathname.startsWith("/barang-milik-negara")) return true;
     if (pathname === "/llat") return true;
+    if (pathname.startsWith("/akuntansi-pelaporan")) return true;
   }
 
   if (pathname === "/") return true;

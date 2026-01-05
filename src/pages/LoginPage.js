@@ -72,45 +72,56 @@ function LoginPage() {
     } finally {
     }
   };
+  const isMobile = window.innerWidth <= 768;
 
   return (
-    <div>
+  <div style={{ height: "100vh", width: "100%", overflow: "hidden" }}>
+    {/* HEADER */}
+    <div
+      style={{
+        height: isMobile ? "180px" : "320px",
+        background: "linear-gradient(90deg, #59c7ff, #2f8afd)",
+        display: "flex",
+        alignItems: "center",
+        padding: isMobile ? "0 20px" : "0 70px",        
+      }}
+    >
+      <img src="/logo-kemnaker.png" alt="logo" height="129" width="376" />
+    </div>
+
+    {/* BODY */}
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: isDesktop ? "1fr 1fr" : "1fr",
+        height: "calc(100vh - 110px)",
+      }}
+    >
+      {/* LEFT CONTENT */}
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: isDesktop ? "45vw 55vw" : "1fr",
-          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "40px",
+          paddingLeft: "25%",
+          height: "70%",
+          maxWidth: "80%",
         }}
       >
-        <div style={{ margin: "25% 30%" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginBottom: "2rem",
-            }}
-          >
-            <img src="/logo-kemnaker-ori.png" alt="logo" width="200"></img>
-          </div>
-          <div
-            style={{
-              width: "100%",
-              marginBottom: "2rem",
-              textAlign: "center",
-            }}
-          >
-            <span style={{ fontWeight: 600, fontSize: 28 }}>
-              Selamat Datang di SiAKBAR
-            </span>
-            <br></br>
-            <span style={{ fontWeight: 600, fontSize: 16 }}>
-              Anggaran, Keuangan, dan Barang
-            </span>
-          </div>
+        <div style={{ width: "100%", maxWidth: 400 }}>
+          <h1 style={{ fontWeight: 800, marginBottom: 4 , fontSize: isMobile ? 26 : 35, lineHeight: 1.2,}}>
+            Selamat Datang di
+            <br />
+            <span style={{ fontWeight: 900 }}>SiAKBAR</span>
+          </h1>
+          <p style={{ color: "#777", marginBottom: isMobile ? 24 : 40, fontSize: isMobile ? 14 : 16,}}>
+            Anggaran, Keuangan, dan Barang
+          </p>
+
           <form
             onSubmit={handleSubmit}
-            style={{ display: "flex", gap: 20, flexDirection: "column" }}
+            style={{ display: "flex", flexDirection: "column", gap: 20 }}
           >
             <Input
               label="Satuan Kerja"
@@ -129,8 +140,9 @@ function LoginPage() {
               value={formData.password}
               onChange={handleChange}
             />
+
             {errorMessage && (
-              <span style={{ fontSize: 16, textAlign: "center", color: "red" }}>
+              <span style={{ color: "red", textAlign: "center" }}>
                 {errorMessage}
               </span>
             )}
@@ -139,21 +151,33 @@ function LoginPage() {
               Login
             </Button>
           </form>
-        </div >
-         {isDesktop && (
+        </div>
+      </div>
+
+      {/* RIGHT IMAGE */}
+      {isDesktop && (
         <div
           style={{
-            backgroundImage: 'url("/login-background-2.jpg")',
+            position: "absolute",
+            top: "170px",        //  naik ke atas
+            right: "30px",
+            left:"50%",
+            width: "40%",
+            height: "80%",
+            backgroundImage: 'url("/background-ver1.jpg")',
             backgroundSize: "cover",
             backgroundPosition: "center",
-            height: "100vh",
-            width: "100%",
+
+            borderRadius: "160px 20px 160px 20px",
+            boxShadow: "0 30px 60px rgba(0,0,0,0.25)",
           }}
-        ></div>
-         )}
-      </div>
+        />
+      )}
+
     </div>
-  );
+  </div>
+);
+
 }
 
 export default LoginPage;

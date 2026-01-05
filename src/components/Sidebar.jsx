@@ -52,6 +52,7 @@ const menuItems = [
   },
   {
     name: "Pelaksanaan Anggaran",
+    path: "/pelaksanaan-anggaran",
     children: [
       {
         name: "Tanda Terima SPP",
@@ -117,7 +118,7 @@ const menuItems = [
   },
   // ===============================================
   {
-    name: "Akuntansi Pelaporan",
+    name: "AKLAP",
     adminOnly: true,
     children: [
       {
@@ -246,7 +247,7 @@ function Sidebar({ onNavigate }) {
             return {
               ...item,
               children: item.children?.filter((child) =>
-                ["Dashboard", "IKPA", "Realisasi", "LLAT", "About"].includes(
+                ["Dashboard", "IKPA", "Realisasi", "LLAT", "AKLAP"].includes(
                   child.name
                 )
               ),
@@ -265,8 +266,11 @@ function Sidebar({ onNavigate }) {
     if (!item.children && item.path) {
       setOpenDropdown(null);
       navigate(item.path);
-      handleNavigate();
       return;
+    }
+
+    if (!isOpen && item.path) {
+      navigate(item.path);
     }
 
     setOpenDropdown(isOpen ? null : item.name);
@@ -392,7 +396,17 @@ function Sidebar({ onNavigate }) {
       <div className="p-4 z-10 border-t border-white/10 bg-white/5 backdrop-blur-sm">
          <button
           onClick={handleLogout}
-          className="flex items-center gap-3 px-4 py-2 w-full text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors text-sm mb-4 font-medium"
+ 
+
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            cursor: "pointer",
+            color: "#fff",
+            paddingBottom: "60px",
+          }}
+
         >
           <LogOut size={18} />
           <span>Logout</span>

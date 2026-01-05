@@ -114,8 +114,8 @@ function BudgetExecution() {
     // realGraph();
   }, [year]);
   return (
-    <div>
-      <div className="flex sm:flex-row justify-between">
+    <div className="space-y-6">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <Breadcrumbs
           items={[
             { name: "Pelaksanaan Anggaran", path: "/pelaksanaan-anggaran" },
@@ -132,14 +132,15 @@ function BudgetExecution() {
       </div>
       <Title>Dashboard Pelaksanaan Anggaran</Title>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-4">
-        <Card className="row-span-2">
-          <div className="flex flex-col items-center ">
+        <Card className="relative col-span-1 row-span-2 rounded-2xl bg-gradient-to-r from-[#5AB2FF] to-[#2E70FD] text-white">
+          <div claSssName="flex flex-col items-center ">
             <span className="font-bold text-2xl text-center">NILAI IKPA</span>
-            <IKPAChart height={"h-48"} val={es1Data?.data?.[0]?.nilaiIKPA} />
-            <div className="bg-gradient-to-b from-[#5C90FD] to-[#2D71FE] rounded-2xl text-center px-4 py-1 mt-2">
-              <span className="font-bold text-sm text-center text-white ">
-                Bulan{" "}
-                {moment().locale("id").subtract(1, "months").format("MMMM")}
+            <span className="text-sm opacity-90 ">
+                {moment().locale("id").subtract(1, "months").format("MMMM YYYY")}
+              </span>
+            <div className="text-center">
+              <span className=" text-5xl font-extrabold tracking-tight">
+                {es1Data?.data?.[0]?.nilaiIKPA ?? "94.91"}
               </span>
             </div>
             <span className="font-bold text-sm text-center">
@@ -147,7 +148,31 @@ function BudgetExecution() {
             </span>
           </div>
         </Card>
-        {cardsData.map((item, index) => (
+        {cardsData.slice(0, 2).map((item, index) => (
+          <Card key={index} className=" 
+          col-span-1
+      rounded-2xl
+      bg-white
+      shadow-xl
+      p-4
+      -mt-0
+      z-20">
+            <div className="flex flex-col">
+              <div className="flex justify-between items-center h-10">
+                <span className="font-bold text-sm sm:text-base">
+                  {item.title}
+                </span>
+                <div className={`${item.color} rounded-lg p-1`}>
+                  <NotepadText color="white" />
+                </div>
+              </div>
+            </div>
+            <span className="text-[50px] font-black text-blue-500">
+              {item.value}
+            </span>
+          </Card>
+        ))}
+        {cardsData.slice(2,8).map((item, index) => (
           <Card className="p-3" key={index}>
             <div className="flex flex-col">
               <div className="flex justify-between items-center h-10">
@@ -222,7 +247,7 @@ function BudgetExecution() {
                 Peringkat Realisasi <br /> Kemnaker
               </span>
               <br></br>
-              <div className="w-40 h-40 sm:w-52 sm:h-52 rounded-full bg-gradient-to-b from-blue-400 to-blue-700 flex items-center justify-center shadow">
+              <div className="w-40 h-40 sm:w-52 sm:h-52 rounded-full bg-gradient-to-r from-[#5AB2FF] to-[#2E70FD] flex items-center justify-center shadow">
                 <span className="text-white text-6xl sm:text-7xl md:text-8xl font-bold">9</span>
               </div>
             </div>
@@ -233,7 +258,7 @@ function BudgetExecution() {
                 Peringkat Alokasi <br /> Seluruh Kementerian
               </span>
               <br></br>
-              <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full bg-gradient-to-b from-blue-400 to-blue-700 flex items-center justify-center shadow-md">
+              <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full bg-gradient-to-r from-[#5AB2FF] to-[#2E70FD] flex items-center justify-center shadow-md">
                 <span className="text-white text-6xl sm:text-7xl md:text-8xl font-bold">16</span>
               </div>
             </div>

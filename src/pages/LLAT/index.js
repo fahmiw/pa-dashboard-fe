@@ -159,13 +159,10 @@ export default function LLATPage() {
 
   return (
     <div>
-      <div className="flex justify-between">
-        <Breadcrumbs
-          items={[{ name: "Pelaksanaan Anggaran / LLAT", path: "/llat" }]}
-        />
+      <div className="flex justify-between items-center px-4 md:px-4 border-b border-gray-100 z-20 bg-white shrink-0 pl-20 md:pl-8 transition-all">
+        <Title>Langkah - Langkah Akhir Tahun</Title>
         <User name={userData?.name} previlege={userData?.role?.toUpperCase()} />
       </div>
-      <Title>Langkah - Langkah Akhir Tahun</Title>
       <div className="flex gap-6 flex-col md:flex-row">
         {/* Kalender */}
         <Card className="w-full md:w-3/5 p-2 md:p-4 text-xs md:text-base">

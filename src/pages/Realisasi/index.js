@@ -23,6 +23,7 @@ import User from "@/components/User";
 import { useBudgetExecution } from "../BudgetExecution/useBudgetExecution";
 import Card from "@/components/Card";
 import { dataTable } from "../BudgetExecution/constants";
+import { Wallet } from "lucide-react";
 
 const columns = [
   {
@@ -465,13 +466,9 @@ function RealisasiPage() {
 
   return (
     <div>
-      <div className="flex justify-between">
-        <Breadcrumbs
-          items={[
-            { name: "Pelaksanaan Anggaran / Realisasi", path: "/realisasi" },
-          ]}
-        />
-        <User
+      <div className="flex justify-between items-center px-4 md:px-4 border-b border-gray-100 z-20 bg-white shrink-0 pl-20 md:pl-8 transition-all">
+        <Title>Realisasi</Title>
+       <User
           name={userData?.name}
           previlege={userData?.role?.toUpperCase()}
           username={userData?.biro_code}
@@ -480,74 +477,89 @@ function RealisasiPage() {
           id={userData?.id}
         />
       </div>
-      <Title>Realisasi</Title>
+
       <Paper style={{ marginBottom: "1vw" }}>
-        <div className="grid grid-cols-3 gap-4 mb-4 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-4 mb-4 mt-4">
           {/* CARD INDEX 0 (TOTAL) */}
           <Card className="row-span-2 p-4 bg-white shadow-md rounded-2xl border border-gray-100">
             <div className="flex flex-col items-center mb-3">
               <span className="font-bold text-2xl text-center text-gray-800">
-                REALISASI
-              </span>
-            </div>
-
-            {/* Total Pagu */}
-            <div className="bg-gradient-to-r from-[#1E3A8A] to-[#3B82F6] rounded-lg px-3 py-2 text-white flex flex-col m-1 shadow-sm">
-              <span className="font-semibold text-sm flex items-center">
-                <span className="w-1 h-4 bg-white mr-2 rounded"></span> TOTAL
-                PAGU
-              </span>
-              <span className="font-bold text-lg">
-                Rp {(2123 / 1_000).toFixed(2)} M
-              </span>
-            </div>
-
-            {/* Blokir */}
-            <div className="bg-gradient-to-r from-[#EF4444] to-[#F87171] rounded-lg px-3 py-2 text-white flex flex-col m-1 shadow-sm">
-              <span className="font-semibold text-sm flex items-center">
-                <span className="w-1 h-4 bg-white mr-2 rounded"></span> BLOKIR
-              </span>
-              <span className="font-bold text-lg flex justify-between">
-                <span>Rp {(2123 / 1_000).toFixed(2)} M</span>
-                <span>(20%)</span>
-              </span>
-            </div>
-
-            {/* Realisasi */}
-            <div className="bg-gradient-to-r from-[#15803D] to-[#4ADE80] rounded-lg px-3 py-2 text-white flex flex-col m-1 shadow-sm">
-              <span className="font-semibold text-sm flex items-center">
-                <span className="w-1 h-4 bg-white mr-2 rounded"></span>{" "}
-                REALISASI
-              </span>
-              <span className="font-bold text-lg flex justify-between">
-                <span>Rp {(2123 / 1_000).toFixed(2)} M</span>
-                <span>▲ 58%</span>
-              </span>
-            </div>
-
-            {/* Target */}
-            <div className="bg-gradient-to-r from-[#FACC15] to-[#FDE68A] rounded-lg px-3 py-2 text-gray-900 flex flex-col m-1 shadow-sm">
-              <span className="font-semibold text-sm flex items-center">
-                <span className="w-1 h-4 bg-black mr-2 rounded"></span> TARGET
-              </span>
-              <span className="font-bold text-lg flex justify-between">
-                <span>Rp {(88239 / 1_000).toFixed(2)} M</span>
-                <span>▼ 22%</span>
+                Realisasi Kemnaker
               </span>
             </div>
 
             {/* Bulan */}
-            <div className="bg-gradient-to-b from-[#3B82F6] to-[#1E40AF] rounded-lg text-center m-1 py-1.5 shadow-sm">
+            <div className="bg-gradient-to-r from-[#3B82F6] to-[#1E40AF] rounded-lg text-center m-1 py-1.5 shadow-sm">
               <span className="font-semibold text-sm text-white">
                 Bulan{" "}
                 {moment().locale("id").subtract(1, "months").format("MMMM")}
               </span>
             </div>
+            
+            {/* Total Pagu */}
+            <div className="grid grid-cols-3 items-center border border-blue-500 rounded-lg px-3 py-2 m-1 mb-5 mt-5">
+              <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-50 ">
+              <Wallet size={20} className="text-blue-600"  />
+              </div>      
+              <span className="text-sm font-semibold">
+                TOTAL PAGU
+              </span>
+              <span className="text-lg font-bold ">
+                Rp {(2123 / 1_000).toFixed(2)} M
+              </span>
+            </div>
 
-            {/* Footer */}
-            <div className="flex flex-col items-center mb-3">
-              <span className="font-semibold text-sm text-center mt-1 text-gray-700">
-                Kementerian Ketenagakerjaan
+            {/* Blokir */}
+            <div className="grid grid-cols-3 items-center border border-[#fc0166] rounded-lg px-3 py-2 m-1 mb-5 mt-5 ">
+              <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#FC0166] ">
+              <Wallet size={20} className="text-[#FFCFE2]" />
+              </div>      
+              <span className="text-sm font-semibold">
+                Blokir
+              </span>
+              <span className="font-bold text-lg items-center flex flex-col justify-between">
+                <span>Rp {(2123 / 1_000).toFixed(2)} M</span>
+                <div className="self-end">
+                  <span className="inline-block rounded-2xl bg-[#FC0166] px-2 text-[#FFCFE2]">
+                    20%
+                  </span>
+                </div>
+              </span>
+            </div>
+
+            {/* Realisasi */}
+            <div className="grid grid-cols-3 items-center border border-[#bcdd51] rounded-lg px-3 py-2 m-1 mb-5 mt-5 ">
+              <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#BCDD51]">
+              <Wallet size={20} className="text-[#EDF6D0]" />
+              </div>      
+              <span className="text-sm font-semibold">
+                Realisasi
+              </span>
+              <span className="font-bold text-lg items-center flex flex-col justify-end justify-between">
+                <span>Rp {(2123 / 1_000).toFixed(2)} M</span>
+                <div className="self-end">
+                  <span className="inline-block rounded-2xl bg-[#EDF6D0] px-2 text-[#1C7D44]">
+                    ▲ 58%
+                  </span>
+                </div>
+              </span>
+            </div>
+
+            {/* Target */}
+            <div className="grid grid-cols-3 items-center border border-[#ffbe02] rounded-lg px-3 py-2 m-1 mb-5 mt-5 ">
+              <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#FFBE02] border border-yellow-500">
+              <Wallet size={20} className="text-[#FFF3D0]" />
+              </div>      
+              <span className="text-sm font-semibold">
+                Target
+              </span>
+              <span className="font-bold text-lg flex flex-col justify-end justify-between">
+                <span>Rp {(2123 / 1_000).toFixed(2)} M</span>
+                <div className="self-end">
+                  <span className="inline-block rounded-2xl bg-[#fff3d0] px-2 text-[#ffbe02]">
+                    ▼ 58%
+                  </span>
+                </div>
               </span>
             </div>
           </Card>
@@ -560,25 +572,26 @@ function RealisasiPage() {
               const targetNaik = item.targetPersen >= 50;
 
               return (
+                <div className="bg-sky-400 rounded-2xl pt-[20px] overflow-hidden ">
                 <Card
                   key={index}
-                  className="p-4 bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl border border-gray-100"
+                  className="bg-white p-6 w-full shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl border border-gray-100"
                 >
                   <div className="flex justify-between items-center mb-3">
-                    <h3 className="font-semibold text-gray-800 text-[15px] tracking-tight">
+                    <h3 className="font-bold text-[#000000] text-[20px] tracking-tight">
                       {item.title}
                     </h3>
                   </div>
 
-                  <div className="flex flex-col gap-2 text-sm font-medium">
+                  <div className="flex flex-col gap-3 text-sm font-medium">
                     {/* Pagu */}
-                    <div className="bg-gradient-to-r from-[#1E3A8A] to-[#3B82F6] text-white rounded-lg px-3 py-2 flex justify-between">
+                    <div className="border border-[#2f8afd] rounded-lg px-3 py-2 flex justify-between">
                       <span>Pagu:</span>
                       <span>Rp {(item.pagu / 1_000_000_000).toFixed(2)} M</span>
                     </div>
 
                     {/* Blokir */}
-                    <div className="bg-gradient-to-r from-[#EF4444] to-[#F87171] text-white rounded-lg px-3 py-2 flex justify-between">
+                    <div className="border border-[#fc0166] rounded-lg px-3 py-2 flex justify-between">
                       <span>Blokir:</span>
                       <span>
                         Rp {(item.blokir / 1_000_000_000).toFixed(2)} M (
@@ -587,7 +600,7 @@ function RealisasiPage() {
                     </div>
 
                     {/* Realisasi */}
-                    <div className="bg-gradient-to-r from-[#15803D] to-[#4ADE80] text-white rounded-lg px-3 py-2 flex justify-between">
+                    <div className="border border-[#bcdd51] rounded-lg px-3 py-2 flex justify-between">
                       <span>Realisasi:</span>
                       <span>
                         Rp {(item.realisasiNominal / 1_000_000_000).toFixed(2)}{" "}
@@ -596,7 +609,7 @@ function RealisasiPage() {
                     </div>
 
                     {/* Target */}
-                    <div className="bg-gradient-to-r from-[#FACC15] to-[#FDE68A] text-gray-900 rounded-lg px-3 py-2 flex justify-between">
+                    <div className="border border-[#ffbe02] rounded-lg px-3 py-2 flex justify-between">
                       <span>Target:</span>
                       <span>
                         Rp {(item.targetNominal / 1_000_000_000).toFixed(2)} M{" "}
@@ -605,6 +618,7 @@ function RealisasiPage() {
                     </div>
                   </div>
                 </Card>
+                </div>
               );
             })}
         </div>
@@ -619,7 +633,9 @@ function RealisasiPage() {
             gap: 10,
             marginBottom: "1rem",
             justifyContent: "space-between",
+             flexWrap: "wrap",
           }}
+          className="flex flex-col lg:flex-row gap-4 mb-4 lg:items-end"
         >
           <Input
             label="Search"
@@ -634,7 +650,7 @@ function RealisasiPage() {
             }
           />
           <Select
-            label="Eselon 1"
+           placeholder="Pilih Eselon 1"
             name="eselon_code"
             onChange={(e) =>
               setFilter((prev) => ({
@@ -647,7 +663,7 @@ function RealisasiPage() {
               label: q.name,
               value: q.eselon_code,
             }))}
-            style={{ width: "120vh" }}
+            style={{ minWidth: "280px", maxWidth: "420px" , marginLeft: "auto"}}
             isOpen={selectOpen}
             setIsOpen={setSelectOpen}
           />
@@ -674,7 +690,7 @@ function RealisasiPage() {
             </Button> */}
           </div>
         </div>
-        <div className="overflow-x-auto max-w-full md:max-w-[90vw] lg:max-w-[83vw]">
+        <div className="overflow-x-auto max-w-full md:max-w-[90vw] rounded-xl lg:max-w-[83vw]">
           <Table className="min-w-max w-full border-collapse" sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHeader>
               {/* Baris pertama */}
