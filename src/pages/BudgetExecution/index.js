@@ -1,29 +1,30 @@
 import React, { useContext, useEffect, useState } from "react";
-import Title from "@/components/Title";
-import Breadcrumbs from "@/components/Breadcrumbs";
-import Card from "@/components/Card";
 import User from "@/components/User";
-import IKPAChart from "./GaugeChart";
 import moment from "moment";
 import "moment/locale/id";
-import { dashboardCards, dataTable } from "./constants";
-import { NotepadText } from "lucide-react";
-import { TableBudgetExecution } from "./TableBudgetExecution";
+import { dataTable } from "./constants";
+import { Menu, AlignLeft } from "lucide-react";
 import { apiRequest } from "@/services/APIHelper";
 import { AppContext } from "@/contexts/AppContext";
-import Select from "@/components/Select";
 import BarChart from "./BarChart";
 
+// Helper Warna Badge
+const getBadgeColor = (name) => {
+  if (name.includes("Sekretariat")) return "bg-orange-100 text-orange-600";
+  if (name.includes("Inspektorat")) return "bg-lime-100 text-lime-700";
+  if (name.includes("Ditjen Binapenta")) return "bg-sky-100 text-sky-600";
+  if (name.includes("PHI")) return "bg-pink-100 text-pink-600";
+  if (name.includes("Binwasnaker")) return "bg-yellow-100 text-yellow-700";
+  if (name.includes("Barenbang")) return "bg-green-100 text-green-700";
+  if (name.includes("Binalavotas")) return "bg-lime-200 text-lime-800";
+  return "bg-gray-100 text-gray-700";
+};
+
 function BudgetExecution() {
-  const { userData } = useContext(AppContext);
+  const { userData, setMobileMenuOpen } = useContext(AppContext);
   const [cardsData, setCardsData] = useState([]);
   const [es1Data, setEs1Data] = useState({ columns: [], data: [] });
-  const mapColorByIKPA = (ikpa) => {
-    if (ikpa >= 95) return "bg-[#6FCE00]"; // Sangat Baik
-    if (ikpa >= 89) return "bg-[#2E70FD]"; // Baik
-    if (ikpa >= 70) return "bg-[#ECFD2E]"; // Cukup
-    return "bg-[#FF4155]"; // Kurang
-  };
+  const [year, setYear] = useState("2025");
 
   const dataset = [
     { name: "Completed", value: 320 },
@@ -31,9 +32,9 @@ function BudgetExecution() {
     { name: "Blocked", value: 60 },
     { name: "Backlog", value: 140 },
   ];
-  const [values, setValues] = useState([70.70, 33.39, 50.48, 9.41, 83.77, 33.10, 31.96, 29.94]);
-  const [selectOpen, setSelectOpen] = useState(false);
-  const [year, setYear] = useState("2025");
+  const [values, setValues] = useState([
+    70.7, 33.39, 50.48, 9.41, 83.77, 33.1, 31.96, 29.94,
+  ]);
 
   const es1Options = async () => {
     try {
@@ -44,17 +45,8 @@ function BudgetExecution() {
         .filter((q) => q.satker_code === null)
         .map((item, index) => {
           const constantItem = dataTable.data[index];
-
           return {
             eselon: constantItem?.eselon || item.name,
-            revisiDipa: item.revisi_dipa,
-            deviasiHalIII: item.deviasi_hal3_dipa,
-            realisasiAnggaran: item.realisasi_anggaran,
-            belanjaKontraktual: item.belanja_kontraktual,
-            penyelesaianTagihan: item.penyelesaian_tagihan,
-            pengelolaanUPTUP: item.pengelolaan_up_tup,
-            capaianOutput: item.capaian_output,
-            dispensasiSPM: item.dispensasi_spm,
             nilaiIKPA: item.nilai_ikpa,
           };
         });
@@ -69,204 +61,227 @@ function BudgetExecution() {
         .map((item) => ({
           title: item.eselon,
           value: item.nilaiIKPA.toFixed(2),
-          color: mapColorByIKPA(item.nilaiIKPA),
         }));
       setCardsData(mappedCards);
     } catch (error) {
       console.error(error);
     }
   };
-  // const realGraph = async () => {
-  //   try {
-  //     const data = await apiRequest({
-  //       url: `/api/bmn/pnbp?tahun=` + year,
-  //     });
-  //     setMonth(
-  //       data?.data?.years.length === 0
-  //         ? [
-  //             "Jan",
-  //             "Feb",
-  //             "Mar",
-  //             "Apr",
-  //             "May",
-  //             "Jun",
-  //             "Jul",
-  //             "Aug",
-  //             "Sep",
-  //             "Oct",
-  //             "Nov",
-  //             "Dec",
-  //           ]
-  //         : data?.data?.years
-  //     );
-  //     setValues(
-  //       data?.data?.values.length === 0
-  //         ? [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-  //         : data?.data?.values.map((v) => Number(v))
-  //     );
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+
   const eselons = es1Data.data.map((item) => item.eselon);
+
   useEffect(() => {
     es1Options();
-    // realGraph();
   }, [year]);
+
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <Breadcrumbs
-          items={[
-            { name: "Pelaksanaan Anggaran", path: "/pelaksanaan-anggaran" },
-          ]}
+    // 1. Container Utama: relative & overflow-hidden
+    <div className="bg-[#F8FAFC] min-h-screen font-sans relative overflow-hidden">
+      
+      {/* === BACKGROUND DECORATION START === */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
+        <img 
+          src="/logo-kemnaker-sidebar.png" 
+          alt="Pattern Top" 
+          className="absolute -top-10 -left-10 w-[35%] md:w-[20%] object-contain opacity-[0.04]" 
         />
-        <User
-          name={userData?.name}
-          previlege={userData?.role?.toUpperCase()}
-          username={userData?.biro_code}
-          role={userData?.role}
-          access_code={userData?.access_code}
-          id={userData?.id}
+        <img 
+          src="/logo-kemnaker-sidebar.png" 
+          alt="Pattern Bottom" 
+          className="absolute -bottom-10 -right-10 w-[35%] md:w-[20%] object-contain opacity-[0.04]" 
         />
       </div>
-      <Title>Dashboard Pelaksanaan Anggaran</Title>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-4">
-        <Card className="relative col-span-1 row-span-2 rounded-2xl bg-gradient-to-r from-[#5AB2FF] to-[#2E70FD] text-white">
-          <div claSssName="flex flex-col items-center ">
-            <span className="font-bold text-2xl text-center">NILAI IKPA</span>
-            <span className="text-sm opacity-90 ">
-                {moment().locale("id").subtract(1, "months").format("MMMM YYYY")}
-              </span>
-            <div className="text-center">
-              <span className=" text-5xl font-extrabold tracking-tight">
-                {es1Data?.data?.[0]?.nilaiIKPA ?? "94.91"}
-              </span>
-            </div>
-            <span className="font-bold text-sm text-center">
-              Kementerian Ketenagakerjaan
-            </span>
+      {/* === BACKGROUND DECORATION END === */}
+
+      {/* 2. Content Wrapper */}
+      <div className="max-w-[1440px] mx-auto p-4 md:p-8 space-y-8 relative z-10">
+        
+        {/* HEADER */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0 pl-16 md:pl-0 transition-all">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              className="fixed top-4 left-4 z-50 p-2 bg-white rounded-xl shadow-sm border border-gray-200 md:hidden hover:bg-gray-50 text-gray-600"
+            >
+              <Menu size={20} />
+            </button>
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
+              Pelaksanaan Anggaran
+            </h1>
           </div>
-        </Card>
-        {cardsData.slice(0, 2).map((item, index) => (
-          <Card key={index} className=" 
-          col-span-1
-      rounded-2xl
-      bg-white
-      shadow-xl
-      p-4
-      -mt-0
-      z-20">
-            <div className="flex flex-col">
-              <div className="flex justify-between items-center h-10">
-                <span className="font-bold text-sm sm:text-base">
-                  {item.title}
-                </span>
-                <div className={`${item.color} rounded-lg p-1`}>
-                  <NotepadText color="white" />
+          <div className="flex items-center gap-3 self-end md:self-auto pr-2 md:pr-0">
+            <User
+              name={userData?.name || "Administrator"}
+              previlege={userData?.role?.toUpperCase() || "Administrator"}
+              username={userData?.biro_code}
+              role={userData?.role}
+            />
+          </div>
+        </div>
+
+        {/* CARD GRID OVERLAPPING */}
+        <div className="flex flex-col lg:flex-row relative">
+          {/* A. KARTU BIRU */}
+          <div className="w-full lg:w-[360px] flex-shrink-0 relative z-0 mb-6 lg:mb-0 lg:-mr-16">
+            <div className="h-full min-h-[440px] rounded-[2.5rem] bg-gradient-to-b from-[#3B9EFF] to-[#2E70FD] text-white p-8 pt-12 relative overflow-hidden shadow-2xl flex flex-col justify-between">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-white opacity-5 rounded-full blur-3xl -translate-y-10 translate-x-10"></div>
+              <div className="absolute bottom-0 left-0 w-40 h-40 bg-white opacity-5 rounded-full blur-2xl translate-y-10 -translate-x-10"></div>
+
+              <div className="relative z-10 flex flex-col justify-between h-full lg:max-w-[80%]">
+                <div>
+                  <span className="font-bold text-3xl block mb-2 tracking-wide">
+                    Nilai IKPA
+                  </span>
+                  <span className="text-sm font-semibold opacity-80 uppercase tracking-widest">
+                    Per{" "}
+                    {moment()
+                      .locale("id")
+                      .subtract(1, "months")
+                      .format("MMMM YYYY")}
+                  </span>
+                </div>
+                <div className="text-[5.5rem] leading-none font-bold tracking-tighter drop-shadow-lg">
+                  {es1Data?.data?.[0]?.nilaiIKPA
+                    ? es1Data.data[0].nilaiIKPA.toFixed(2)
+                    : "93.46"}
+                </div>
+                <div>
+                  <span className="font-bold text-lg block leading-tight opacity-90 max-w-[200px]">
+                    Kementrian Ketenagakerjaan
+                  </span>
                 </div>
               </div>
             </div>
-            <span className="text-[50px] font-black text-blue-500">
-              {item.value}
-            </span>
-          </Card>
-        ))}
-        {cardsData.slice(2,8).map((item, index) => (
-          <Card className="p-3" key={index}>
-            <div className="flex flex-col">
-              <div className="flex justify-between items-center h-10">
-                <span className="font-bold text-sm sm:text-base">
-                  {item.title}
+          </div>
+
+          {/* B. GRID KARTU PUTIH */}
+          <div className="flex-1 z-10 py-6 lg:py-8 pl-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 w-full h-full">
+              {cardsData.slice(0, 7).map((item, index) => (
+                <div
+                  key={index}
+                  className="p-5 rounded-2xl bg-white shadow-lg shadow-gray-100/50 border border-gray-50 flex flex-col justify-between min-h-[140px] hover:scale-[1.02] transition-transform duration-300 cursor-default"
+                >
+                  <div
+                    className={`self-start px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider mb-2 ${getBadgeColor(
+                      item.title
+                    )}`}
+                  >
+                    {item.title}
+                  </div>
+                  <div className="text-[3.5rem] leading-none font-bold text-gray-900 mt-1 tracking-tighter">
+                    {item.value}
+                  </div>
+                </div>
+              ))}
+
+              {/* Legend Warna */}
+              <div className="p-5 rounded-2xl bg-white shadow-lg shadow-gray-100/50 border border-gray-50 flex flex-col justify-center gap-2.5">
+                <span className="font-bold text-gray-900 text-xs mb-1">
+                  Indikator Warna
                 </span>
-                <div className={`${item.color} rounded-lg p-1`}>
-                  <NotepadText color="white" />
+                <div className="space-y-2 text-[11px] font-medium text-gray-600">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-[#84CC16] rounded-sm shrink-0"></div>
+                    <span>
+                      Nilai IKPA ≥ 95 :{" "}
+                      <strong className="text-gray-900">Sangat Baik</strong>
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-[#38BDF8] rounded-sm shrink-0"></div>
+                    <span>
+                      89 ≤ Nilai IKPA &lt; 95 :{" "}
+                      <strong className="text-gray-900">Baik</strong>
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-[#FACC15] rounded-sm shrink-0"></div>
+                    <span>
+                      70 ≤ Nilai IKPA &lt; 89 :{" "}
+                      <strong className="text-gray-900">Cukup</strong>
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-[#F43F5E] rounded-sm shrink-0"></div>
+                    <span>
+                      Nilai IKPA &lt; 70 :{" "}
+                      <strong className="text-gray-900">Kurang</strong>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
-            <span className="text-[50px] font-black text-blue-500">
-              {item.value}
-            </span>
-          </Card>
-        ))}
-        <div className="flex flex-col justify-between">
-          <span className="font-bold">Ketentuan Penilaian</span>
-          <div className="flex gap-2 items-center">
-            <div className="w-3 h-3 bg-[#6FCE00]"></div>
-            <span className="text-sm">
-              {"Nilai IKPA ≥ 95"}
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span>
-            <span className="text-sm">:</span>
-            <span className="text-sm">Sangat Baik</span>
           </div>
-          <div className="flex gap-2 items-center">
-            <div className="w-3 h-3 bg-[#2E70FD]"></div>
-            <span className="text-sm">{"89 ≤ Nilai IKPA < 95"}</span>
-            <span className="text-sm">:</span>
-            <span className="text-sm">Baik</span>
+        </div>
+
+        {/* SECTION BAWAH */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
+          {/* CARD BAR CHART */}
+          <div className="p-8 pt-12 rounded-[2.5rem] shadow-sm border border-gray-100 bg-white relative overflow-visible w-full">
+            <div className="absolute -top-6 left-8 w-14 h-14 bg-[#5AB2FF] rounded-full flex items-center justify-center shadow-lg z-20">
+              <AlignLeft size={32} color="white" strokeWidth={3} />
+            </div>
+            <div className="mb-4">
+              <h3 className="font-bold text-xl text-gray-900 tracking-tight">
+                Persentase Realisasi Anggaran per Eselon 1
+              </h3>
+            </div>
+            <div className="w-full">
+              <BarChart
+                data={dataset}
+                height="h-80"
+                labels={eselons}
+                values={values}
+              />
+            </div>
           </div>
-          <div className="flex gap-2 items-center">
-            <div className="w-3 h-3 bg-[#ECFD2E]"></div>
-            <span className="text-sm">{"70 ≤ Nilai IKPA < 89"}</span>
-            <span className="text-sm">:</span>
-            <span className="text-sm">Cukup</span>
-          </div>
-          <div className="flex gap-2 items-center">
-            <div className="w-3 h-3 bg-[#FF4155]"></div>
-            <span className="text-sm">
-              {"Nilai IKPA < 70"}
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span>
-            <span className="text-sm">:</span>
-            <span className="text-sm">Kurang</span>
+
+          {/* CARD PERINGKAT */}
+          <div className="p-8 pt-12 rounded-[2.5rem] shadow-sm border border-gray-100 bg-white flex flex-col justify-center relative overflow-visible w-full">
+            <div className="absolute -top-6 left-8 w-14 h-14 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg z-20">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="white"
+                className="animate-pulse"
+              >
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+            </div>
+
+            <div className="flex items-center justify-around h-full gap-2">
+              <div className="flex flex-col items-center text-center group cursor-pointer w-1/2">
+                <div className="w-32 h-32 rounded-[2.5rem] bg-gradient-to-b from-[#5AB2FF] to-[#2E70FD] flex items-center justify-center shadow-lg shadow-blue-200 mb-5 transform group-hover:scale-105 transition-transform duration-300">
+                  <span className="text-white text-[4rem] font-bold drop-shadow-md">
+                    9
+                  </span>
+                </div>
+                <h4 className="font-bold text-gray-800 text-sm leading-tight">
+                  Peringkat Realisasi <br /> Kemnaker
+                </h4>
+              </div>
+
+              <div className="w-px h-32 bg-gray-100"></div>
+
+              <div className="flex flex-col items-center text-center group cursor-pointer w-1/2">
+                <div className="w-32 h-32 rounded-[2.5rem] bg-gradient-to-b from-[#5AB2FF] to-[#2E70FD] flex items-center justify-center shadow-lg shadow-blue-200 mb-5 transform group-hover:scale-105 transition-transform duration-300">
+                  <span className="text-white text-[4rem] font-bold drop-shadow-md">
+                    15
+                  </span>
+                </div>
+                <h4 className="font-bold text-gray-800 text-sm leading-tight">
+                  Peringkat Alokasi <br /> Seluruh Kementrian
+                </h4>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mr-4">
-        <Card className="">
-          <div className="grid grid-cols-[90%_10%] items-center mb-4">
-            <span className="font-bold text-lg block mb-4">
-              Persentase Realisasi Anggaran per Eselon 1
-            </span>
-          </div>
-          <div className="items-center">
-            <BarChart
-              data={dataset}
-              height="h-72 "
-              labels={eselons}
-              values={values}
-            />
-          </div>
-        </Card>
-        <Card className="p-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Peringkat Realisasi Kemnaker */}
-            <div className="flex flex-col items-center">
-              <span className="font-semibold text-center mb-2 text-xl">
-                Peringkat Realisasi <br /> Kemnaker
-              </span>
-              <br></br>
-              <div className="w-40 h-40 sm:w-52 sm:h-52 rounded-full bg-gradient-to-r from-[#5AB2FF] to-[#2E70FD] flex items-center justify-center shadow">
-                <span className="text-white text-6xl sm:text-7xl md:text-8xl font-bold">9</span>
-              </div>
-            </div>
-
-            {/* Peringkat Alokasi */}
-            <div className="flex flex-col items-center">
-              <span className="font-semibold text-center mb-2 text-xl">
-                Peringkat Alokasi <br /> Seluruh Kementerian
-              </span>
-              <br></br>
-              <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full bg-gradient-to-r from-[#5AB2FF] to-[#2E70FD] flex items-center justify-center shadow-md">
-                <span className="text-white text-6xl sm:text-7xl md:text-8xl font-bold">16</span>
-              </div>
-            </div>
-          </div>
-        </Card>
-      </div>
-
-      {/* <TableBudgetExecution dataTable={es1Data} /> */}
     </div>
   );
 }

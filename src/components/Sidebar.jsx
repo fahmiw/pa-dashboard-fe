@@ -26,6 +26,10 @@ import {
   FileText, // Icon Baru
   Box,      // Icon Baru
   Activity, // Icon Baru
+  Leaf,     // Icon Baru PTUK
+  Flame,    // Icon Baru Kerugian Negara
+  DollarSign, // Icon Baru PNBP
+  ArrowRightLeft // Icon Baru Pengelola Keuangan
 } from "lucide-react";
 import React, { useState, useContext, useEffect } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
@@ -38,6 +42,8 @@ const menuItems = [
     path: "/dashboard-utama",
     icon: <LayoutDashboard size={20} />,
   },
+  
+  // === MENU PTUK ===
   {
     name: "PTUK",
     adminOnly: true,
@@ -47,9 +53,26 @@ const menuItems = [
         path: "/ptuk/tuntutan-ganti-rugi",
         icon: <Building size={18} />,
       },
+      {
+        name: "Kerugian Negara",
+        path: "/ptuk/kerugian-negara",
+        icon: <Flame size={18} />,
+      },
+      {
+        name: "PNBP",
+        path: "/ptuk/pnbp",
+        icon: <DollarSign size={18} />,
+      },
+      {
+        name: "Pengelola Keuangan",
+        path: "/ptuk/pengelola-keuangan",
+        icon: <ArrowRightLeft size={18} />,
+      },
     ],
-    icon: <Layers size={20} />,
+    icon: <Leaf size={20} />, 
   },
+  // =================
+
   {
     name: "Pelaksanaan Anggaran",
     path: "/pelaksanaan-anggaran",
@@ -93,7 +116,8 @@ const menuItems = [
     ],
     icon: <HandCoins size={20} />,
   },
-  // === UPDATE BAGIAN INI (BARANG MILIK NEGARA) ===
+  
+  // === MENU BARANG MILIK NEGARA ===
   {
     name: "Barang Milik Negara",
     adminOnly: true,
@@ -116,7 +140,8 @@ const menuItems = [
     ],
     icon: <Package size={20} />,
   },
-  // ===============================================
+  // ===============================
+  
   {
     name: "AKLAP",
     adminOnly: true,
@@ -207,7 +232,8 @@ function Sidebar({ onNavigate }) {
       return menuItems
         .filter(
           (item) =>
-            // Update: Menambahkan "Barang Milik Negara" agar muncul untuk admin
+            // Pastikan Admin bisa lihat PTUK dan BMN
+            item.name === "PTUK" ||
             item.name === "Pelaksanaan Anggaran" || 
             item.name === "Management" || 
             item.name === "Barang Milik Negara"
@@ -396,17 +422,8 @@ function Sidebar({ onNavigate }) {
       <div className="p-4 z-10 border-t border-white/10 bg-white/5 backdrop-blur-sm">
          <button
           onClick={handleLogout}
- 
-
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            cursor: "pointer",
-            color: "#fff",
-            paddingBottom: "60px",
-          }}
-
+          // Menggunakan class Tailwind agar konsisten dan rapi
+          className="flex items-center gap-3 px-4 py-2 w-full text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors text-sm mb-4 font-medium"
         >
           <LogOut size={18} />
           <span>Logout</span>
