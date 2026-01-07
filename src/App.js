@@ -26,7 +26,9 @@ import ReportingAccounting from "./pages/AkuntansiPelaporan";
 import LLATPage from "./pages/LLAT";
 import Helpdesk from "./pages/Helpdesk"; 
 import StrukturOrganisasi from "./pages/StrukturOrganisasi";
-
+import PNBP from "./pages/PNBP";
+import KelolaKeuangan from "./pages/pengelolaKeuangan";
+import KerugianNegara from "./pages/kerugianNegara";
 // --- IMPORT SUB-PAGE BARANG MILIK NEGARA ---
 import StatusPSP from "./pages/BarangMilikNegara/StatusPSP"; 
 import KondisiAset from "./pages/BarangMilikNegara/KondisiAset"; 
@@ -55,6 +57,7 @@ function App() {
             </PrivateRoute>
           }
         />
+       
         <Route
           path="/dashboard-utama"
           element={
@@ -321,6 +324,36 @@ function App() {
             <PrivateRoute>
               <AppLayout isAdmin={isAdmin}>
                 <PTUKSub1Page />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/ptuk/pnbp"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <PNBP />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/ptuk/pengelola-keuangan"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <KelolaKeuangan />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/ptuk/kerugian-negara"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <KerugianNegara/>
               </AppLayout>
             </PrivateRoute>
           }

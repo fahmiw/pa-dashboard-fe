@@ -42,10 +42,10 @@ function AkuntansiPelaporan() {
       </div>
 
       {/* GRID UTAMA: 1 Kolom di HP, 2 Kolom di Laptop Besar */}
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 pt-2">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 pt-2">
         {/* === CARD 1: OPINI BPK === */}
-        <Card className="relative ">
-          <div className="absolute -top-5 left-6 w-10 h-10 rounded-full bg-[#ffcfe2] flex items-center justify-center text-green-600 shadow-sm border border-white">
+        <Card className="relative mb-2">
+          <div className="absolute -top-5 left-6 w-10 h-10 rounded-full bg-[#ecfdf3] flex items-center justify-center text-[#bcdd51] shadow-sm border border-white">
             <MessageSquareText size={20} />
           </div>
           <h2 className="font-bold text-2xl mb-4">
@@ -78,7 +78,7 @@ function AkuntansiPelaporan() {
         </Card>
 
         {/* === CARD 2: NILAI MATURITAS SPIP === */}
-        <Card className="relative">
+        <Card className="relative mb-2">
           <div className="flex justify-between items-center mb-4">
             <div className="flex gap-4 items-center">
               <div className="absolute -top-5 left-6 w-10 h-10 rounded-full bg-[#ffcfe2] flex items-center justify-center text-green-600 shadow-sm border border-white">
@@ -95,7 +95,7 @@ function AkuntansiPelaporan() {
           <div className="flex flex-col md:flex-row items-center justify-center gap-6 mt-4 md:mt-12">
             {/* BOX 1 */}
             <div className="flex flex-col items-center gap-2 w-full md:w-auto">
-              <div className="bg-gradient-to-tr from-[#C2C3C8] to-[#CCC] rounded-2xl text-center h-[140px] md:h-[180px] w-full md:w-[260px] flex items-center justify-center shadow-md">
+              <div className="bg-[#898a8d] rounded-3xl text-center h-[140px] md:h-[180px] w-full md:w-[260px] flex items-center justify-center shadow-md">
                 <span className="text-6xl md:text-[85px] font-black text-white scale-y-125 md:scale-y-150 transition-all">
                   3.92
                 </span>
@@ -111,7 +111,7 @@ function AkuntansiPelaporan() {
 
             {/* BOX 2 */}
             <div className="flex flex-col items-center gap-2 w-full md:w-auto">
-              <div className="bg-gradient-to-b from-[#5C90FD] to-[#2D71FE] rounded-2xl text-center h-[140px] md:h-[180px] w-full md:w-[260px] flex items-center justify-center shadow-md">
+              <div className="bg-gradient-to-r from-[#59c7ff] to-[#2f8afd] rounded-3xl text-center h-[140px] md:h-[180px] w-full md:w-[260px] flex items-center justify-center shadow-md">
                 <span className="text-6xl md:text-[85px] font-black text-white scale-y-125 md:scale-y-150 transition-all">
                   3.93
                 </span>
@@ -123,54 +123,54 @@ function AkuntansiPelaporan() {
           </div>
         </Card>
       </div>
-
-      <div className="bg-white relative rounded-xl border shadow-sm gap-3">
-      <div className=" p-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div  >
-          <div className="absolute -top-5 left-6 w-10 h-10 rounded-full bg-[#fff3d0] flex items-center justify-center">
-            <div className=" w-6 h-6 rounded-full bg-[#ffbe02] flex items-center justify-center text-[#fff3d0] shadow-sm border border-white">
-                <DollarSign size={15} />
+           
+        <div className="bg-white  relative rounded-xl border shadow-sm  gap-3">
+        <div className=" p-5 grid grid-cols-1 sm:grid-cols-2 gap-3 ">
+          <div  >
+            <div className="absolute -top-5 left-6 w-10 h-10 rounded-full bg-[#fff3d0] flex items-center justify-center">
+              <div className="w-6 h-6 rounded-full bg-[#ffbe02] flex items-center justify-center text-[#fff3d0] shadow-sm border border-white">
+                  <DollarSign size={15}  />
+              </div>
             </div>
-          </div>
-          <h1 className="text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
-            <span />
-            LRA 30 Juni 2024 dan 30 Juni 2025
-          </h1>
-
-              <BarChart height="h-32" />
-          </div>
-          <div>
             <h1 className="text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
-              <span  />
-              Neraca Semester I
+              <span />
+              LRA 30 Juni 2024 dan 30 Juni 2025
             </h1>
 
-              <BarChartNeraca height="h-32" />
+                <BarChart height="h-32" />
+            </div>
+            <div>
+              <h1 className="text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                <span  />
+                Neraca Semester I
+              </h1>
+
+                <BarChartNeraca height="h-32" />
+            </div>
           </div>
+        
+        <div >
+        <div className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div  >
+            <h1 className="text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
+              <span />
+              LPE Semester 130 Juni 2025 & 30 Juni 2024
+            </h1>
+
+                <BarChartLPE height="h-32" />
+            </div>
+            <div>
+            <h1 className="text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
+              <span />
+              Lo Semester 130 Juni 2025 & 30 Juni 2024
+            </h1>
+
+                <BarChartLo height="h-32" />
+            </div>
         </div>
-      
-      <div >
-      <div className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div  >
-          <h1 className="text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
-            <span />
-            LPE Semester 130 Juni 2025 & 30 Juni 2024
-          </h1>
-
-              <BarChartLPE height="h-32" />
-          </div>
-          <div>
-          <h1 className="text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
-            <span />
-            Lo Semester 130 Juni 2025 & 30 Juni 2024
-          </h1>
-
-              <BarChartLo height="h-32" />
-          </div>
-      </div>
-      </div>
-</div>
-      </div>
+        </div>
+        </div>
+      </div> 
   );
 }
 

@@ -38,14 +38,7 @@ export default function StrukturOrganisasi() {
   return (
     <div className="bg-gray-50 min-h-screen font-sans p-4 md:p-8">
       
-      {/* 1. HAMBURGER MENU */}
-      <button 
-          onClick={() => setMobileMenuOpen(prev => !prev)}
-          className="fixed top-4 left-4 z-50 p-2.5 bg-white/90 backdrop-blur-sm rounded-xl shadow-md border border-gray-100 text-gray-600 hover:bg-gray-50 active:scale-95 active:bg-gray-200 transition-all cursor-pointer md:hidden"
-      >
-          <Menu size={24} />
-      </button>
-
+      
       {/* 2. HEADER CLEAN */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0 mb-6 md:mb-8 pl-14 md:pl-0 transition-all">
         <div>

@@ -9,15 +9,6 @@ export default function Helpdesk() {
 
   return (
     <div className="flex flex-col h-screen font-sans bg-white">
-      
-      {/* === 1. HAMBURGER MENU (FIXED / MENGAMBANG) === */}
-      {/* Sama persis styling-nya dengan Tata Usaha */}
-      <button 
-          onClick={() => setMobileMenuOpen(prev => !prev)}
-          className="fixed top-3 left-4 z-50 p-2.5 bg-white/90 backdrop-blur-sm rounded-xl shadow-md border border-gray-100 text-gray-600 hover:bg-gray-50 active:scale-95 active:bg-gray-200 transition-all cursor-pointer md:hidden"
-      >
-          <Menu size={24} />
-      </button>
 
       {/* === 2. HEADER (Putih Bersih) === */}
       {/* pl-20 di mobile agar judul geser ke kanan tidak ketabrak hamburger */}

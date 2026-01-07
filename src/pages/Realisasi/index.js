@@ -320,6 +320,18 @@ function RealisasiPage() {
       tanggal_sumber_data: "2025-10-30 07:17:57",
     },
   ]);
+  const PNBP_DATA_VISUAL = [
+  { eselon: "0261 | Sekretariat Jenderal", pagu: 5290360987000, realisasi: 3290360987000, persentase: 98, sisa: 305715270781, blokir: 190578869000, paguEfektif: 3290360987000, color: "green" },
+  { eselon: "Belanja Pegawai (51)", pagu: 5290360987000, realisasi: 3290360987000, persentase: 100, sisa: 305715270781, blokir: "-", paguEfektif: 3290360987000, color: "green" },
+  { eselon: "Belanja Barang (52)", pagu: 5290360987000, realisasi: 3290360987000, persentase: 63.2, sisa: 305715270781, blokir: 190578869000, paguEfektif: 3290360987000, color: "orange" },
+  { eselon: "Belanja Modal (53)", pagu: 5290360987000, realisasi: 3290360987000, persentase: 56, sisa: 305715270781, blokir: 578869000, paguEfektif: 3290360987000, color: "pink" },
+  { eselon: "0262 | Inspektorat Jenderal", pagu: 5290360987000, realisasi: 3290360987000, persentase: 98, sisa: 305715270781, blokir: 190578869000, paguEfektif: 3290360987000, color: "green" },
+  { eselon: "0264 | Ditjen Pembinaan Penempatan Tenaga Kerja dan  Perluasan Kesempatan Kerja", pagu: 5290360987000, realisasi: 3290360987000, persentase: 98, sisa: 305715270781, blokir: 190578869000, paguEfektif: 3290360987000, color: "green" },
+  { eselon: "0265 | Ditjen Pembinaan Hubungan Industrial dan Jaminan  Sosial Tenaga Kerja ", pagu: 5290360987000, realisasi: 3290360987000, persentase: 98, sisa: 305715270781, blokir: 190578869000, paguEfektif: 3290360987000, color: "green" },
+  { eselon: "0268 | Ditjen Pembinaan Pengawasan Ketenagakerjaan dan Keselamatan dan Kesahatan Kerja ", pagu: 5290360987000, realisasi: 3290360987000, persentase: 98, sisa: 305715270781, blokir: 190578869000, paguEfektif: 3290360987000, color: "green" },
+  { eselon: "0265 | Direktorat Jenderal Pembinaan Pelatihan Vokasi dan Produktivitas ", pagu: 5290360987000, realisasi: 3290360987000, persentase: 98, sisa: 305715270781, blokir: 190578869000, paguEfektif: 3290360987000, color: "green" },
+
+];
   const [es1Data, setEs1Data] = useState([]);
   const [filter, setFilter] = useState({
     searchKey: "",
@@ -333,23 +345,7 @@ function RealisasiPage() {
     if (!num && num !== 0) return "-";
     return (num / 1_000_000_000).toFixed(2) + " M";
   };
-  // const fetchTable = async () => {
-  //   try {
-  //     const query = buildQueryString({
-  //       eselon_code: filter.eselonKey,
-  //       search_key: filter.searchKey,
-  //     });
-  //     const data = await apiRequest({
-  //       url: `/api/pa/ikpa/all?${query}`,
-  //     });
-  //     let result = data?.data;
-  //     if (data.success) {
-  //       setDataTable(result);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  
 
   const es1Options = async () => {
     try {
@@ -481,7 +477,18 @@ function RealisasiPage() {
       <Paper style={{ marginBottom: "1vw" }}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-4 mb-4 mt-4">
           {/* CARD INDEX 0 (TOTAL) */}
-          <Card className="row-span-2 p-4 bg-white shadow-md rounded-2xl border border-gray-100">
+          <Card className="row-span-2 p-4 relative shadow-md rounded-2xl border border-gray-100">
+            <div className="absolute -top-6 left-8 w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg z-20">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="white"
+              className="animate-pulse"
+            >
+              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+            </svg>
+          </div>
             <div className="flex flex-col items-center mb-3">
               <span className="font-bold text-2xl text-center text-gray-800">
                 Realisasi Kemnaker
@@ -690,136 +697,59 @@ function RealisasiPage() {
             </Button> */}
           </div>
         </div>
-        <div className="overflow-x-auto max-w-full md:max-w-[90vw] rounded-xl lg:max-w-[83vw]">
-          <Table className="min-w-max w-full border-collapse" sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHeader>
-              {/* Baris pertama */}
-              <TableRow>
-                {columns.map((col, index) =>
-                  col.children ? (
-                    <TableCell
-                      key={index}
-                      align="center"
-                      colSpan={col.children.length}
-                    >
-                      {col.label}
-                    </TableCell>
-                  ) : (
-                    <TableCell
-                      key={index}
-                      align="center"
-                      rowSpan={col.rowSpan || 1}
-                    >
-                      {col.label}
-                    </TableCell>
-                  )
-                )}
-              </TableRow>
+       <div className="overflow-x-auto rounded-xl border border-gray-100 shadow-lg">
+  <table className="w-full text-left border-collapse min-w-[1000px] text-[12px]">
+    {/* Header Sesuai Gambar */}
+    <thead>
+      <tr className="text-white font-bold">
+        <th className="px-6 py-4 bg-[#42a5f5] border-r border-white/20">Eselon 1</th>
+        <th className="px-6 py-4 bg-[#42a5f5] border-r border-white/20 text-center">Pagu</th>
+        <th className="px-6 py-4 bg-[#42a5f5] border-r border-white/20 text-center">Realisasi</th>
+        <th className="px-6 py-4 bg-[#42a5f5] border-r border-white/20 text-center">Persentase</th>
+        <th className="px-6 py-4 bg-[#42a5f5] border-r border-white/20 text-center">Sisa</th>
+        <th className="px-6 py-4 bg-[#ff005c] border-r border-white/20 text-center uppercase">Blokir</th>
+        <th className="px-6 py-4 bg-[#42a5f5] text-center">Pagu Efektif</th>
+      </tr>
+    </thead>
 
-              {/* Baris kedua */}
-              <TableRow>
-                {columns.map((col) =>
-                  col.children
-                    ? col.children.map((child, idx) => (
-                        <TableCell key={child.key || idx} align="center">
-                          {child.label}
-                        </TableCell>
-                      ))
-                    : null
-                )}
-              </TableRow>
-            </TableHeader>
+    <tbody className="text-gray-700">
+      {PNBP_DATA_VISUAL.map((item, index) => (
+        <tr 
+          key={index} 
+          className={`border-b border-gray-50 hover:bg-sky-50/30 transition-colors ${index % 2 === 0 ? "bg-white" : "bg-[#f8fbff]"}`}
+        >
+          <td className="px-6 py-4 font-bold text-gray-800">{item.eselon}</td>
+          <td className="px-6 py-4 text-right font-mono text-gray-600">{item.pagu.toLocaleString('id-ID')}</td>
+          <td className="px-6 py-4 text-right font-mono text-gray-600">{item.realisasi.toLocaleString('id-ID')}</td>
+          <td className="px-6 py-4 text-center">
+            <span className={`px-3 py-1 rounded-full font-bold text-[10px] 
+              ${item.color === 'green' ? 'bg-[#e8f5e9] text-[#2e7d32]' : 
+                item.color === 'orange' ? 'bg-[#fff3e0] text-[#ef6c00]' : 
+                'bg-[#fce4ec] text-[#d81b60]'}`}>
+              {item.persentase}%
+            </span>
+          </td>
+          <td className="px-6 py-4 text-right font-mono text-gray-600">{item.sisa.toLocaleString('id-ID')}</td>
+          <td className="px-6 py-4 text-right font-mono text-gray-600 bg-[#fff5f8]">{item.blokir === "-" ? "-" : item.blokir.toLocaleString('id-ID')}</td>
+          <td className="px-6 py-4 text-right font-mono text-gray-600">{item.paguEfektif.toLocaleString('id-ID')}</td>
+        </tr>
+      ))}
 
-            <TableBody>
-              {dataTables.map((item, index) => (
-                <TableRow key={item.eselon_code}>
-                  {/* Kolom Eselon */}
-                  <TableCell align="left" sx={{ fontWeight: "bold" }}>
-                    {item.name}
-                  </TableCell>
-
-                  {/* --- Kolom Total --- */}
-                  <TableCell align="right">
-                    {item.pagu.toLocaleString("id-ID")}
-                  </TableCell>
-                  <TableCell align="right">
-                    {item.realisasi.toLocaleString("id-ID")}
-                    <br />
-                    <span style={{ color: "#888", fontSize: "1em" }}>
-                      ({item.persen_realisasi.toFixed(2)}%)
-                    </span>
-                  </TableCell>
-                  <TableCell align="right">
-                    {item.sisa.toLocaleString("id-ID")}
-                  </TableCell>
-
-                  {/* --- Kolom Pegawai (jenis_belanja = 51) --- */}
-                  <TableCell align="right">
-                    {item.per_jenis["51"]?.pagu?.toLocaleString("id-ID") ?? "-"}
-                  </TableCell>
-                  <TableCell align="right">
-                    {item.per_jenis["51"] ? (
-                      <>
-                        {item.per_jenis["51"].realisasi.toLocaleString("id-ID")}
-                        <br />
-                        <span style={{ color: "#888", fontSize: "1em" }}>
-                          ({item.per_jenis["51"].persentase_real}%)
-                        </span>
-                      </>
-                    ) : (
-                      "-"
-                    )}
-                  </TableCell>
-                  <TableCell align="right">
-                    {item.per_jenis["51"]?.sisa?.toLocaleString("id-ID") ?? "-"}
-                  </TableCell>
-
-                  {/* --- Kolom Barang (jenis_belanja = 52) --- */}
-                  <TableCell align="right">
-                    {item.per_jenis["52"]?.pagu?.toLocaleString("id-ID") ?? "-"}
-                  </TableCell>
-                  <TableCell align="right">
-                    {item.per_jenis["52"] ? (
-                      <>
-                        {item.per_jenis["52"].realisasi.toLocaleString("id-ID")}
-                        <br />
-                        <span style={{ color: "#888", fontSize: "1em" }}>
-                          ({item.per_jenis["52"].persentase_real}%)
-                        </span>
-                      </>
-                    ) : (
-                      "-"
-                    )}
-                  </TableCell>
-                  <TableCell align="right">
-                    {item.per_jenis["52"]?.sisa?.toLocaleString("id-ID") ?? "-"}
-                  </TableCell>
-
-                  {/* --- Kolom Modal (jenis_belanja = 53) --- */}
-                  <TableCell align="right">
-                    {item.per_jenis["53"]?.pagu?.toLocaleString("id-ID") ?? "-"}
-                  </TableCell>
-                  <TableCell align="right">
-                    {item.per_jenis["53"] ? (
-                      <>
-                        {item.per_jenis["53"].realisasi.toLocaleString("id-ID")}
-                        <br />
-                        <span style={{ color: "#888", fontSize: "1em" }}>
-                          ({item.per_jenis["53"].persentase_real}%)
-                        </span>
-                      </>
-                    ) : (
-                      "-"
-                    )}
-                  </TableCell>
-                  <TableCell align="right">
-                    {item.per_jenis["53"]?.sisa?.toLocaleString("id-ID") ?? "-"}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
+      {/* Baris TOTAL (Warna Kuning) */}
+      <tr className="bg-[#fff9c4] font-bold text-gray-800 border-t-2 border-gray-200">
+        <td className="px-6 py-5 uppercase italic">Total</td>
+        <td className="px-6 py-5 text-right font-mono">529.036.0987.000</td>
+        <td className="px-6 py-5 text-right font-mono">329.036.0987.000</td>
+        <td className="px-6 py-5 text-center">
+          <span className="bg-[#e8f5e9] text-[#2e7d32] px-3 py-1 rounded-full text-[10px]">98%</span>
+        </td>
+        <td className="px-6 py-5 text-right font-mono">305.715.270.781</td>
+        <td className="px-6 py-5 text-right font-mono bg-[#fff5f8]">190.578.869.000</td>
+        <td className="px-6 py-5 text-right font-mono">329.036.0987.000</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
       </Paper>
       <Modal
         open={isOpenModal}

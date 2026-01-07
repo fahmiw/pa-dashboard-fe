@@ -23,9 +23,12 @@ import {
   CircleDollarSign,
   Calendar,
   Axis3D,
+  DollarSign,
   FileText, // Icon Baru
   Box,      // Icon Baru
-  Activity, // Icon Baru
+  Activity,
+  ArrowLeftRight,
+  Flame, // Icon Baru
 } from "lucide-react";
 import React, { useState, useContext, useEffect } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
@@ -45,8 +48,24 @@ const menuItems = [
       {
         name: "Tuntutan Ganti Rugi",
         path: "/ptuk/tuntutan-ganti-rugi",
-        icon: <Building size={18} />,
+        icon: <Building  size={18} />,
       },
+      {
+        name: "Kerugian Negara",
+        path: "/ptuk/kerugian-negara",
+        icon: <Flame  size={18} />,
+      },
+      {
+        name: "PNBP",
+        path: "/ptuk/pnbp",
+        icon: <DollarSign size={18} />,
+      },
+      {
+        name: "Pengelola Keuangan",
+        path: "/ptuk/pengelola-keuangan",
+        icon: <ArrowLeftRight size={18} />,
+      },
+      
     ],
     icon: <Layers size={20} />,
   },
@@ -247,7 +266,7 @@ function Sidebar({ onNavigate }) {
             return {
               ...item,
               children: item.children?.filter((child) =>
-                ["Dashboard", "IKPA", "Realisasi", "LLAT", "AKLAP"].includes(
+                ["Dashboard", "IKPA", "Realisasi", "LLAT", "AKLAP", "PNBP"].includes(
                   child.name
                 )
               ),
@@ -266,6 +285,7 @@ function Sidebar({ onNavigate }) {
     if (!item.children && item.path) {
       setOpenDropdown(null);
       navigate(item.path);
+      handleNavigate();
       return;
     }
 
