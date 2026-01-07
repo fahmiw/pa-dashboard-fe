@@ -46,6 +46,7 @@ const menuItems = [
   // === UPDATE BAGIAN INI (PTUK) ===
   {
     name: "PTUK",
+    path: "/ptuk/dashboard", // <--- PERBAIKAN: Sesuai dengan App.js
     adminOnly: true,
     children: [
       {
@@ -68,18 +69,14 @@ const menuItems = [
         path: "/ptuk/pengelola-keuangan",
         icon: <ArrowRightLeft size={18} />,
       },
-      // { // Opsi jika menu Tuntutan Ganti Rugi lama masih mau dipertahankan
-      //   name: "Tuntutan Ganti Rugi",
-      //   path: "/ptuk/tuntutan-ganti-rugi",
-      //   icon: <Building size={18} />,
-      // },
     ],
-    icon: <Leaf size={20} />, // Ganti icon Layers jadi Leaf agar fresh
+    icon: <Leaf size={20} />, 
   },
   // ================================
 
   {
     name: "Pelaksanaan Anggaran",
+    path: "/pelaksanaan-anggaran",
     children: [
       {
         name: "Tanda Terima SPP",
@@ -294,8 +291,11 @@ function Sidebar({ onNavigate }) {
     if (!item.children && item.path) {
       setOpenDropdown(null);
       navigate(item.path);
-      handleNavigate();
       return;
+    }
+
+    if (!isOpen && item.path) {
+      navigate(item.path);
     }
 
     setOpenDropdown(isOpen ? null : item.name);
@@ -417,22 +417,11 @@ function Sidebar({ onNavigate }) {
         </nav>
       </div>
 
-      {/* --- FOOTER --- */}
+      {/* --- FOOTER (Rapih pakai Tailwind) --- */}
       <div className="p-4 z-10 border-t border-white/10 bg-white/5 backdrop-blur-sm">
          <button
           onClick={handleLogout}
-<<<<<<< Updated upstream
           className="flex items-center gap-3 px-4 py-2 w-full text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors text-sm mb-4 font-medium"
-=======
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            cursor: "pointer",
-            color: "#fff",
-            paddingBottom: "60px",
-          }}
->>>>>>> Stashed changes
         >
           <LogOut size={18} />
           <span>Logout</span>

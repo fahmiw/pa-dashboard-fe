@@ -42,7 +42,7 @@ export default function BarChartHorizontal({
             value: val,
             itemStyle: {
               color: "#2979FF",
-              borderRadius: [0, 10, 10, 0],
+              borderRadius: [0, 0, 0, 0],
             },
             label: {
               show: true,

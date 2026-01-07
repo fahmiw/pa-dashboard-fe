@@ -4,8 +4,7 @@ function Title({ children }) {
   return (
     <div
       style={{
-        background: "#3F73A0",
-        color: "white",
+        background: "#ffffffff",
         padding: "1rem",
         borderRadius: 4,
         fontWeight: "bold",

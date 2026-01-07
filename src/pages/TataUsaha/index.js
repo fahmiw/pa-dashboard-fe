@@ -30,21 +30,10 @@ function TataUsaha() {
   return (
     <div className="bg-gray-50 min-h-screen font-sans p-4 md:p-8">
       
-      {/* === 1. HAMBURGER MENU (FIXED) === */}
-      <button 
-          onClick={handleToggleSidebar}
-          className="fixed top-4 left-4 z-50 p-2.5 bg-white/90 backdrop-blur-sm rounded-xl shadow-md border border-gray-100 text-gray-600 hover:bg-gray-100 active:scale-95 active:bg-gray-200 transition-all cursor-pointer md:hidden"
-      >
-          <Menu size={24} />
-      </button>
-
-      {/* ... SISANYA SAMA PERSIS SEPERTI SEBELUMNYA ... */}
-      {/* ... HEADER, GRID, dll ... */}
-      
       {/* HEADER CLEAN */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0 mb-8 pl-16 md:pl-0 transition-all">
         <div>
-          <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Tata Usaha</h1>
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">Tata Usaha</h1>
         </div>
         <div className="flex items-center gap-3 self-end md:self-auto pr-2 md:pr-0">
           <User name={"Administrator"} previlege={"Administrator"} />

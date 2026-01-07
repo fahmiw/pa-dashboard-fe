@@ -16,7 +16,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import DashboardPage from "./pages/Dashboard";
 import DashboardManagementPage from "./pages/DashboardManagement";
 import IkpaPage from "./pages/Ikpa";
-import PTUKSub1Page from "./pages/PTUKSub1"; // (Mungkin ini 'Tuntutan Ganti Rugi' lama, saya biarkan dulu)
+import PTUKSub1Page from "./pages/PTUKSub1"; 
 import MainDashboard from "./pages/MainDashboard";
 import BudgetExecution from "./pages/BudgetExecution";
 import TandaTerimaPage from "./pages/TandaTerima";
@@ -32,7 +32,8 @@ import StatusPSP from "./pages/BarangMilikNegara/StatusPSP";
 import KondisiAset from "./pages/BarangMilikNegara/KondisiAset"; 
 import JumlahJenisBMN from "./pages/BarangMilikNegara/JumlahJenisBMN";
 
-// --- IMPORT SUB-PAGE PTUK (BARU) ---
+// --- IMPORT SUB-PAGE PTUK (UPDATED) ---
+// Perbaikan path sesuai struktur folder baru (Flat Structure)
 import PTUKDashboard from "./pages/PTUK/Dashboard";
 import LHPKementrian from "./pages/PTUK/LHP";
 import KerugianNegara from "./pages/PTUK/KerugianNegara";
@@ -89,7 +90,7 @@ function App() {
 
         {/* 2. LHP Kementrian */}
         <Route
-          path="/ptuk/lhp" // Sesuaikan path ini dengan menuHooks/Sidebar
+          path="/ptuk/lhp" 
           element={
             <PrivateRoute>
               <AppLayout isAdmin={isAdmin}>

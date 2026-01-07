@@ -50,8 +50,8 @@ const columns = [
     children: [{ key: "capaian_output", label: "Capaian Output" }],
   },
   { key: "nilai_ikpa", label: "Nilai IKPA", rowSpan: 10},
-  { key: "dispensasi_spm", label: "Dispensasi SPM", rowSpan: 11 },
-  { key: "tanggal_sumber_data", label: "Tanggal Sumber Data", rowSpan: 12 },
+//   { key: "dispensasi_spm", label: "Dispensasi SPM", rowSpan: 11 },
+//   { key: "tanggal_sumber_data", label: "Tanggal Sumber Data", rowSpan: 12 },
 ];
 
 function IkpaPage() {
@@ -200,11 +200,10 @@ function IkpaPage() {
 
   return (
     <div>
-      <div className="flex justify-between">
-        <Breadcrumbs
-          items={[{ name: "Pelaksanaan Anggaran / IKPA", path: "/ikpa" }]}
-        />
-        <User
+      <div className="flex justify-between items-center px-4 md:px-8 py-3 md:py-3 border-b border-gray-100 z-20 bg-white shrink-0 pl-20 md:pl-8 transition-all">
+        <h1 className="text-xl md:text-2xl font-bold text-gray-900"><Title>Indikator Kinerja Pelaksanaan Anggaran </Title></h1>
+        <div className="flex items-center">
+          <User
           name={userData?.name}
           previlege={userData?.role?.toUpperCase()}
           username={userData?.biro_code}
@@ -212,18 +211,23 @@ function IkpaPage() {
           access_code={userData?.access_code}
           id={userData?.id}
         />
+        </div>
       </div>
-      <Title>Indikator Pelaksanaan Anggaran Tingkat Satuan Kerja</Title>
+      
+      <div className="
+        m-4
+      ">
       <Paper
-        elevation={3}
+        elevation={3} sx={{ overflow: "hidden" }}
         // style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
       >
         <div
           style={{
             display: "flex",
-            gap: 10,
+            gap: 16,
             marginBottom: "1rem",
             justifyContent: "space-between",
+             flexWrap: "wrap",
           }}
         >
           <Input
@@ -239,7 +243,8 @@ function IkpaPage() {
             }
           />
           <Select
-            label="Eselon 1"
+            // label="Eselon 1"
+            placeholder="Pilih Eselon 1"
             name="eselon_code"
             onChange={(e) =>
               setFilter((prev) => ({
@@ -252,7 +257,7 @@ function IkpaPage() {
               label: q.name,
               value: q.eselon_code,
             }))}
-            style={{ width: "120vh" }}
+            style={{ minWidth: "280px", maxWidth: "420px" , marginLeft: "auto"}}
             isOpen={selectOpen}
             setIsOpen={setSelectOpen}
           />
@@ -279,9 +284,10 @@ function IkpaPage() {
             </Button> */}
           </div>
         </div>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <div style={{ overflowX: "auto", width: "100%" }}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table" className="w-full overflow-x-auto">
           <TableHeader>
-            <TableRow>
+            <TableRow className="bg-[#2F80ED] text-white" >
               {columns.map((col, index) =>
                 col.children ? (
                   <TableCell
@@ -304,7 +310,7 @@ function IkpaPage() {
             </TableRow>
 
             {/* Baris kedua */}
-            <TableRow>
+            <TableRow className="bg-[#2F80ED] text-white">
               {columns.map((col) =>
                 col.children
                   ? col.children.map((child, idx) => (
@@ -322,7 +328,7 @@ function IkpaPage() {
                 {/* Row utama (group) */}
                 {group.parent && (
                   <TableRow
-                    sx={{ backgroundColor: "#f0f0f0", fontWeight: "bold" }}
+                    sx={{ backgroundColor: "#EBF8FF", fontWeight: "bold" }}
                   >
                     <TableCell align="center">
                       {group.parent.eselon_code}
@@ -358,19 +364,19 @@ function IkpaPage() {
                         {group.parent.nilai_ikpa}
                       </div>
                     </TableCell>
-                    <TableCell align="center">
+                    {/* <TableCell align="center">
                       {group.parent.dispensasi_spm}
                     </TableCell>
                     <TableCell align="center">
                       {moment(group.parent.tanggal_sumber_data).format(
                         "YYYY/MM/DD"
                       )}
-                    </TableCell>
+                    </TableCell> */}
                   </TableRow>
                 )}
                 {group.parent && (
                   <TableRow
-                    sx={{ backgroundColor: "#feffebff", fontWeight: "bold" }}
+                    sx={{ backgroundColor: "#ffffffff", fontWeight: "bold" }}
                   >
                     <TableCell align="center" colSpan="2">
                     {"Nilai Aspek"}
@@ -429,9 +435,19 @@ function IkpaPage() {
                 ))}
               </React.Fragment>
             ))}
+            {/* TOTAL */}
+            <TableRow className="bg-[#FFF6D8] font-semibold">
+              <TableCell colSpan={2}>Total</TableCell>
+              <TableCell colSpan={2}>87.9%</TableCell>
+              <TableCell colSpan={4}>93.85</TableCell>
+              <TableCell>100</TableCell>
+              <TableCell />
+            </TableRow>
           </TableBody>
         </Table>
+        </div>
       </Paper>
+       </div>
       <Modal
         open={isOpenModal}
         onClose={() => {
@@ -464,6 +480,7 @@ function IkpaPage() {
           </Button>
         </form>
       </Modal>
+   
     </div>
   );
 }

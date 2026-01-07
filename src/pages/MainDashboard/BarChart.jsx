@@ -9,18 +9,20 @@ export default function BarChart({ height = "h-72" }) {
   const option = {
     grid: {
       left: "5%",
-      right: "5%",
-      bottom: "10%",
-      top: "10%",
+      right: "10%",
+      bottom: "5%",
+      top: "30%",
       containLabel: true,
     },
     legend: {
-      data: ["Tahun 2024", "Tahun 2025"],
-      bottom: 0,
+      data: ["2024", "2025"],
+      orient: "horizontal",   // ke samping
+      right: "2%",          // jarak dari kanan
+      top: "5%",
       icon: "circle",
       textStyle: {
-        color: "#555",
-        fontSize: 12,
+        color: "#000",
+        fontSize: 15,
       },
     },
     xAxis: {
@@ -41,12 +43,12 @@ export default function BarChart({ height = "h-72" }) {
     },
     series: [
       {
-        name: "Tahun 2024",
+        name: "2024",
         type: "bar",
         data: data2024,
         itemStyle: {
           color: "#D1D5DB",
-          borderRadius: [8, 8, 0, 0],
+          borderRadius: [ 0],
         },
         barWidth: "25%",
         barGap: "30%", // jarak antar seri
@@ -59,7 +61,7 @@ export default function BarChart({ height = "h-72" }) {
         },
       },
       {
-        name: "Tahun 2025",
+        name: "2025",
         type: "bar",
         data: data2025.map((val, idx) => ({
           value: val,
@@ -86,8 +88,8 @@ export default function BarChart({ height = "h-72" }) {
           },
         })),
         itemStyle: {
-          color: "#2979FF",
-          borderRadius: [8, 8, 0, 0],
+          color: "#59C7FF",
+          borderRadius: [0],
         },
         barWidth: "25%",
         barGap: "50%",

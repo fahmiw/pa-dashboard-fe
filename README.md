@@ -69,144 +69,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-```
-pa-dashboard-fe
-├─ craco.config.js
-├─ jsconfig.json
-├─ package-lock.json
-├─ package.json
-├─ public
-│  ├─ favicon.ico
-│  ├─ fonts
-│  │  ├─ FunnelDisplay-Bold.ttf
-│  │  ├─ FunnelDisplay-ExtraBold.ttf
-│  │  ├─ FunnelDisplay-Light.ttf
-│  │  ├─ FunnelDisplay-Medium.ttf
-│  │  ├─ FunnelDisplay-Regular.ttf
-│  │  └─ FunnelDisplay-SemiBold.ttf
-│  ├─ index.html
-│  ├─ login-background-2.jpg
-│  ├─ logo-kemnaker-ori.png
-│  ├─ logo-kemnaker-sidebar.png
-│  ├─ logo-kemnaker.png
-│  ├─ Logo.png
-│  ├─ logo192.png
-│  ├─ logo512.png
-│  ├─ manifest.json
-│  ├─ pdf-tester.pdf
-│  ├─ robots.txt
-│  ├─ rokeu-bmn.png
-│  ├─ trophy-black.png
-│  ├─ trophy-gold.png
-│  ├─ trophy-silver.png
-│  └─ under-construct.gif
-├─ README.md
-├─ src
-│  ├─ App.css
-│  ├─ App.js
-│  ├─ App.test.js
-│  ├─ components
-│  │  ├─ Breadcrumbs.jsx
-│  │  ├─ Button.jsx
-│  │  ├─ Card.jsx
-│  │  ├─ Chip.jsx
-│  │  ├─ DatePickerInput.jsx
-│  │  ├─ Dialog.jsx
-│  │  ├─ FileInput.jsx
-│  │  ├─ Input.jsx
-│  │  ├─ Modal.jsx
-│  │  ├─ MultiSelect.jsx
-│  │  ├─ Navbar.jsx
-│  │  ├─ Paper.jsx
-│  │  ├─ PDFViewer.jsx
-│  │  ├─ PrivateRoute.jsx
-│  │  ├─ Select.jsx
-│  │  ├─ Sidebar.jsx
-│  │  ├─ Table.jsx
-│  │  ├─ TableBody.jsx
-│  │  ├─ TableCell.jsx
-│  │  ├─ TableHeader.jsx
-│  │  ├─ TablePagination.jsx
-│  │  ├─ TableRow.jsx
-│  │  ├─ TableSortLabel.jsx
-│  │  ├─ TextArea.jsx
-│  │  ├─ Title.jsx
-│  │  └─ User.jsx
-│  ├─ constants
-│  │  └─ color.jsx
-│  ├─ contexts
-│  │  ├─ AppContext.js
-│  │  └─ AuthContexts.js
-│  ├─ index.css
-│  ├─ index.js
-│  ├─ Layouts
-│  │  └─ AppLayout.js
-│  ├─ logo.svg
-│  ├─ pages
-│  │  ├─ Administrator
-│  │  │  ├─ BarChart.jsx
-│  │  │  ├─ constants.jsx
-│  │  │  ├─ DonutChart.jsx
-│  │  │  └─ index.js
-│  │  ├─ BudgetExecution
-│  │  │  ├─ BarChart.jsx
-│  │  │  ├─ constants.jsx
-│  │  │  ├─ GaugeChart.jsx
-│  │  │  ├─ index.js
-│  │  │  ├─ TableBudgetExecution.jsx
-│  │  │  └─ useBudgetExecution.jsx
-│  │  ├─ Compilation
-│  │  │  └─ index.js
-│  │  ├─ Dashboard
-│  │  │  └─ index.js
-│  │  ├─ DashboardManagement
-│  │  │  └─ index.js
-│  │  ├─ Ikpa
-│  │  │  └─ index.js
-│  │  ├─ ListSatuankerja
-│  │  │  ├─ index.js
-│  │  │  ├─ pendingDocumentsModal.js
-│  │  │  └─ satkerHooks.js
-│  │  ├─ LLAT
-│  │  │  └─ index.js
-│  │  ├─ LoginPage.js
-│  │  ├─ MainDashboard
-│  │  │  ├─ BarChart.jsx
-│  │  │  ├─ BarChartIPA.jsx
-│  │  │  ├─ DonutChart.jsx
-│  │  │  ├─ DonutChartAkuntansi.jsx
-│  │  │  └─ index.js
-│  │  ├─ Menu
-│  │  │  ├─ index.js
-│  │  │  └─ menuHooks.js
-│  │  ├─ PTUKSub1
-│  │  │  └─ index.js
-│  │  ├─ Realisasi
-│  │  │  └─ index.js
-│  │  ├─ ReportingAccounting
-│  │  │  ├─ BarChart.jsx
-│  │  │  └─ index.js
-│  │  ├─ Soon
-│  │  │  └─ index.js
-│  │  ├─ StateProperty
-│  │  │  ├─ BarChart.jsx
-│  │  │  ├─ constants.jsx
-│  │  │  ├─ DonutChart.jsx
-│  │  │  ├─ index.js
-│  │  │  └─ Table.jsx
-│  │  ├─ TandaTerima
-│  │  │  └─ index.js
-│  │  └─ UserManagement
-│  │     └─ index.js
-│  ├─ reportWebVitals.js
-│  ├─ services
-│  │  ├─ APIHelper.js
-│  │  ├─ FetchHelper.js
-│  │  └─ GeneralHelper.js
-│  └─ setupTests.js
-└─ tailwind.config.js
 
-```
 ```
 pa-dashboard-fe
 ├─ craco.config.js
@@ -331,6 +194,17 @@ pa-dashboard-fe
 │  │  ├─ Menu
 │  │  │  ├─ index.js
 │  │  │  └─ menuHooks.js
+│  │  ├─ PTUK
+│  │  │  ├─ Dashboard
+│  │  │  │  └─ index.js
+│  │  │  ├─ KerugianNegara
+│  │  │  │  └─ index.js
+│  │  │  ├─ LHP
+│  │  │  │  └─ index.js
+│  │  │  ├─ PengelolaKeuangan
+│  │  │  │  └─ index.js
+│  │  │  └─ PNBP
+│  │  │     └─ index.js
 │  │  ├─ PTUKSub1
 │  │  │  └─ index.js
 │  │  ├─ Realisasi
