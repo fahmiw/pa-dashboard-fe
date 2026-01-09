@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
+import Title from "@/components/Title";
 import Card from "@/components/Card";
 import DonutChart from "./DonutChart";
 import BarChart from "./BarChart";
 import User from "@/components/User";
-import { AppContext } from "@/contexts/AppContext"; // Pastikan import ini ada
+import { AppContext } from "@/contexts/AppContext"; 
 import {
   datasetBarChart,
   datasetKehadiran,
@@ -28,23 +29,21 @@ function TataUsaha() {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen font-sans p-4 md:p-8">
-      
-      {/* HEADER CLEAN */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0 mb-8 pl-16 md:pl-0 transition-all">
-        <div>
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">Tata Usaha</h1>
+   <div>
+      {/* HEADER */}
+      <div className="flex justify-between items-center px-4 md:px-4 border-b border-gray-100 z-20 bg-white shrink-0 pl-20 md:pl-8 transition-all">
+        <div className="flex items-center">
+          <Title>Tata Usaha</Title>
         </div>
-        <div className="flex items-center gap-3 self-end md:self-auto pr-2 md:pr-0">
+        <div className="w-auto">
           <User name={"Administrator"} previlege={"Administrator"} />
         </div>
       </div>
+      
+    <div className="bg-gray-50 min-h-screen font-sans p-4 md:p-8">
 
       {/* CONTENT GRID */}
       <div className="space-y-8">
-         {/* ... Isi Grid (Card Pegawai, Pendidikan, dll) copy dari kode sebelumnya ... */}
-         {/* ... (Tidak saya tulis ulang semua agar tidak kepanjangan, isinya sama) ... */}
-         
          {/* ROW 1 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-12 gap-x-6 pt-4 md:pt-0">
           <Card className="relative overflow-visible p-6 rounded-3xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] border-none bg-white">
@@ -217,6 +216,7 @@ function TataUsaha() {
 
       </div>
     </div>
+     </div>
   );
 }
 
@@ -251,6 +251,7 @@ function IKKCard({ title, dataset, target, realisasi }) {
              </div>
           </div>
       </Card>
+     
    )
 }
 

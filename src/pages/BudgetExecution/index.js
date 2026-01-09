@@ -80,23 +80,34 @@ function BudgetExecution() {
   }, [year]);
 
   return (
-    <div className="bg-[#F8FAFC] min-h-screen font-sans p-4 md:p-8 space-y-8">
+    <div className="bg-[#F8FAFC] min-h-screen p-4 md:p-8 space-y-8">
       {/* HEADER */}
       <div className="flex justify-between items-center px-4 md:px-4 border-b border-gray-100 z-20 bg-white shrink-0 pl-20 md:pl-8 transition-all">
-        <Title>Pelaksanaan Anggaran</Title>
-        <User
+        <div className="flex items-center">
+          <Title>Pelaksanaan Anggaran</Title>
+        </div>
+        <div className="w-auto">
+          <User
             name={userData?.name || "Administrator"}
             previlege={userData?.role?.toUpperCase() || "Administrator"}
             username={userData?.biro_code}
             role={userData?.role}
           />
+        </div>
       </div>
 
-      {/* CARD GRID OVERLAPPING */}
       <div className="flex flex-col lg:flex-row relative">
-        {/* A. KARTU BIRU (Fixed Width + Negative Margin Right) */}
+        {/* KARTU BIRU */}
         <div className="w-full lg:w-[360px] flex-shrink-0 relative z-0 mb-6 lg:mb-0 lg:-mr-16">
-          <div className="h-full min-h-[440px] rounded-[2.5rem] bg-gradient-to-b from-[#3B9EFF] to-[#2E70FD] text-white p-8 pt-12 relative overflow-hidden shadow-2xl flex flex-col justify-between">
+          <div
+            style={{
+              backgroundImage: `url("/bg-pa.png"), linear-gradient(90deg, #59c7ff, #2f8afd)`,
+              backgroundSize: " cover",
+
+              backgroundRepeat: "no-repeat",
+            }}
+            className="h-full min-h-[440px] rounded-[2.5rem] bg-gradient-to-b from-[#3B9EFF] to-[#2E70FD] text-white p-8 pt-12 relative overflow-hidden shadow-2xl flex flex-col justify-between"
+          >
             <div className="absolute top-0 right-0 w-48 h-48 bg-white opacity-5 rounded-full blur-3xl -translate-y-10 translate-x-10"></div>
             <div className="absolute bottom-0 left-0 w-40 h-40 bg-white opacity-5 rounded-full blur-2xl translate-y-10 -translate-x-10"></div>
 
@@ -128,7 +139,7 @@ function BudgetExecution() {
           </div>
         </div>
 
-        {/* B. GRID KARTU PUTIH (Flex Grow) */}
+        {/*GRID KARTU PUTIH */}
         <div className="flex-1 z-10 py-6 lg:py-8 pl-0">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 w-full h-full">
             {cardsData.slice(0, 7).map((item, index) => (

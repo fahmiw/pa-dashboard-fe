@@ -1,13 +1,12 @@
-import React, { useContext } from "react"; // 1. Import 
+import React, { useContext } from "react"; 
 import { Outlet } from "react-router-dom";
 import { Menu } from "lucide-react";
 import Sidebar from "../components/Sidebar";
 import User from "../components/User";
-import { AppContext } from "../contexts/AppContext"; // 2. Import Context
+import { AppContext } from "../contexts/AppContext"; 
 
 function AppLayout({ children, isAdmin }) {
-  // 3. Ganti useState lokal dengan Global Context
-  // HAPUS: const [sidebarOpen, setSidebarOpen] = useState(false);
+  
   const { mobileMenuOpen, setMobileMenuOpen } = useContext(AppContext);
 
   return (

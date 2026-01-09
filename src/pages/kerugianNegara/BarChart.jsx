@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactECharts from "echarts-for-react";
 
 export default function BarChart({ height = "h-[450px]" }) {
-  // Label Unit Kerja (Eselon 1) sesuai gambar
+  const [isMobile, setIsMobile] = useState(false);
+useEffect(() => {
+  const checkMobile = () => setIsMobile(window.innerWidth < 768);
+  checkMobile();
+  window.addEventListener("resize", checkMobile);
+  return () => window.removeEventListener("resize", checkMobile);
+}, []);
+
+  // Label Unit Kerja (Eselon 1) 
   const categories = [
     "DITJEN BINAPENTA & PKK",
     "DITJEN BINALAVOTAS",
@@ -20,8 +28,8 @@ export default function BarChart({ height = "h-[450px]" }) {
 
   const option = {
     grid: {
-      left: "3%",
-      right: "15%",
+      left: isMobile ? "1%" : "3%",  // Geser pol ke kiri di HP
+      right: isMobile ? "5%" : "15%",
       bottom: "5%",
       top: "5%",
       containLabel: true,
@@ -38,7 +46,6 @@ export default function BarChart({ height = "h-[450px]" }) {
    yAxis: {
     type: "category",
     data: categories,
-    // 1. MEMUNCULKAN GARIS VERTIKAL UTAMA
     axisLine: { 
         show: false, 
         
@@ -47,18 +54,19 @@ export default function BarChart({ height = "h-[450px]" }) {
     axisTick: { 
         show: true, 
         alignWithLabel: true, // Membuat garis berada tepat di tengah kategori
-        length: 20, // Mengatur panjang garis horizontalnya
+        length: isMobile ? 10 : 20, // Mengatur panjang garis horizontalnya
         lineStyle: {
         color: "#6B7280",
         }
     },
     axisLabel: { 
         color: "#374151", 
-        fontSize: 10,
+        fontSize: isMobile ? 8 : 10,
         fontWeight: "bold",
-        width: 150, 
+        width: isMobile ? 70 : 150,
         overflow: "break",
-        margin: 25 // Memberi jarak yang cukup agar garis horizontal terlihat
+        lineHeight: isMobile ? 10 : 14, // Mengatur jarak antar baris teks label
+        margin: isMobile ? 10 : 25 // Memberi jarak yang cukup agar garis horizontal terlihat
     },
     },
     series: [
@@ -67,12 +75,12 @@ export default function BarChart({ height = "h-[450px]" }) {
         type: "bar",
         data: dataTdkLanjut,
         itemStyle: {
-          color: "#bcdd51", // Hijau Muda sesuai gambar
+          color: "#bcdd51", 
           borderRadius: [0, 4, 4, 0],
         },
         barWidth: "35%",
         label: {
-          show: false // Dimatikan agar lebih mirip gambar yang minimalis
+          show: false 
         },
       },
       {
@@ -80,7 +88,7 @@ export default function BarChart({ height = "h-[450px]" }) {
         type: "bar",
         data: dataKerugian,
         itemStyle: {
-          color: "#fc0166", // Pink sesuai gambar
+          color: "#fc0166", 
           borderRadius: [0, 4, 4, 0],
         },
         barWidth: "35%",

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import User from "@/components/User";
 import { Phone, User as UserIcon, Calendar, Menu } from "lucide-react";
 import { AppContext } from "@/contexts/AppContext"; // Import Context
-
+import Title from "@/components/Title";
 export default function Helpdesk() {
   // Ambil fungsi saklar menu dari Context
   const { setMobileMenuOpen } = useContext(AppContext);
@@ -10,11 +10,12 @@ export default function Helpdesk() {
   return (
     <div className="flex flex-col h-screen font-sans bg-white">
 
-      {/* === 2. HEADER (Putih Bersih) === */}
-      {/* pl-20 di mobile agar judul geser ke kanan tidak ketabrak hamburger */}
-      <div className="flex justify-between items-center px-4 md:px-8 py-3 md:py-4 border-b border-gray-100 z-20 bg-white shrink-0 pl-20 md:pl-8 transition-all">
-        <h1 className="text-xl md:text-2xl font-bold text-gray-900">Helpdesk</h1>
+      {/* HEADER (*/}
+      <div className="flex justify-between items-center px-4 md:px-4 border-b border-gray-100 z-20 bg-white shrink-0 pl-20 md:pl-8 transition-all">
         <div className="flex items-center">
+          <Title>Helpdesk</Title>
+        </div>
+        <div className="w-auto">
           <User name={"Mas Febri"} previlege={"Administrator"} />
         </div>
       </div>

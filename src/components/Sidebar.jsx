@@ -43,12 +43,13 @@ const menuItems = [
   },
   {
     name: "PTUK",
+    path: "/ptuk",
     adminOnly: true,
     children: [
       {
-        name: "Tuntutan Ganti Rugi",
-        path: "/ptuk/tuntutan-ganti-rugi",
-        icon: <Building  size={18} />,
+        name: "LPH Kementian ",
+        path: "/ptuk/lhp-kementrian",
+        icon: <DollarSign  size={18} />,
       },
       {
         name: "Kerugian Negara",

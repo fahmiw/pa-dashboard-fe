@@ -29,6 +29,8 @@ import StrukturOrganisasi from "./pages/StrukturOrganisasi";
 import PNBP from "./pages/PNBP";
 import KelolaKeuangan from "./pages/pengelolaKeuangan";
 import KerugianNegara from "./pages/kerugianNegara";
+import LPH from "./pages/LHP";
+import PTUK from "./pages/PTUK";
 // --- IMPORT SUB-PAGE BARANG MILIK NEGARA ---
 import StatusPSP from "./pages/BarangMilikNegara/StatusPSP"; 
 import KondisiAset from "./pages/BarangMilikNegara/KondisiAset"; 
@@ -45,7 +47,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={token ? <Navigate to="/dashboard" /> : <LoginPage />}
+          element={token ? <Navigate to="/dashboard-utama" /> : <LoginPage />}
         />
         <Route
           path="/satuan-kerja"
@@ -329,11 +331,31 @@ function App() {
           }
         />
         <Route
+          path="/ptuk"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <PTUK />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
           path="/ptuk/pnbp"
           element={
             <PrivateRoute>
               <AppLayout isAdmin={isAdmin}>
                 <PNBP />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/ptuk/lhp-kementrian"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <LPH />
               </AppLayout>
             </PrivateRoute>
           }

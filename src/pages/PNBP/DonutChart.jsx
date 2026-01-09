@@ -9,16 +9,16 @@ export default function DonutChart({
     color: ["#59C7FF","#FC0166","#FFBE02","#BCDD51","#898A8D","#6155F5","#0A0A0A"], 
     legend: {
       orient: "vertical",
-      right: 0,          // ✅ legend di kanan
+      right: 70,          // ✅ legend di kanan
       top: "middle",
       icon: "circle",
       itemWidth: 10,
       itemHeight: 10,
-      itemGap: 8,
+      itemGap: 5,
 
       textStyle: {
         fontSize: 11,
-        width: 90,       // ✅ biar jadi ...
+        width: 80,     
         overflow: "truncate",
       },
     },
@@ -29,9 +29,9 @@ export default function DonutChart({
     series: [
       {
         type: "pie",
-        radius: ["35%", "75%"], 
+        radius: ["30%", "70%"], 
         avoidLabelOverlap: false,
-        center: ["40%", "50%"],
+        center: ["28%", "50%"],
         label: {
           show: false, // ❌ hide percentage labels
         },
@@ -52,20 +52,13 @@ export default function DonutChart({
         { value: 50, name: "PHI & JAMSOS" },
         { value: 20, name: "BARENBANG" },
         { value: 20, name: "INSPEKTORAT JENDERAL" },
-          // { value: 50},
-          // { value: 50},
-          // { value: 50},
-          // { value: 50},
-          // { value: 50},
-          // { value: 20},
-          // { value: 20},
         ],
       },
     ],
   };
 
   return (
-    <div className={`w-[400px] ${height}`}>
+    <div className={`w-[380px] ${height}`}>
       <ReactECharts
         option={option}
         style={{ height: "100%", width: "100%" }}

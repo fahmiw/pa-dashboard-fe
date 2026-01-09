@@ -85,13 +85,17 @@ export default function KerugianNegara() {
   const years = Array.from({ length: 2024 - 1999 + 1 }, (_, i) => (2024 - i).toString());
 
   return (
-    <div className="bg-[#f8fafc] min-h-screen font-sans">
-      <div className="flex justify-between items-center px-8 py-2 bg-white border-b shadow-sm">
-        <Title>PTUK</Title>
-        <User />
+    <div className="bg-[#f8fafc] min-h-screen">
+      <div className="flex justify-between items-center px-2 md:px-4 border-b border-gray-100 z-20 bg-white shrink-0 pl-20 md:pl-8 transition-all">
+        <div className="flex items-center">
+          <Title>PTUK</Title>
+        </div>
+        <div className="w-auto">
+           <User name={"Test"} previlege={"Administrator"} />
+        </div>
       </div>
 
-      <div className="p-8 space-y-6">
+      <div className="p-4 md:p-8 space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-end gap-4 w-full">
         {/* Filter Pilih Tahun */}
         <div className="relative w-full md:w-[150px]">
@@ -128,15 +132,15 @@ export default function KerugianNegara() {
           <StatCardPNBP label="Jumlah Tindak Lanjut" value={83328376733} color="border-[#bcdd51]" icon={TrendingUp} iconColor="text-[#bcdd51]" />
         </div>
 
-        <Paper className="p-8 shadow-sm">
+        <Paper className="p-8 shadow-sm relative">
           <div className="mb-4">
-            <div className="flex items-center gap-2 mb-1">
-              <div className="p-1.5 bg-sky-100 rounded-lg">
-                <BarChart3 size={18} className="text-sky-500" />
+            <div className="absolute -top-5 left-6 w-10 h-10 rounded-full bg-[#ecfdf3] flex items-center justify-center text-[#bcdd51] shadow-sm border border-white">
+                 <BarChart3 size={20} />
               </div>
-              <h2 className="font-bold text-gray-800 text-lg">Rekap Tindak Lanjut & Kerugian Negara</h2>
+            <div className="flex items-center gap-2 mb-1">
+              <h2 className="font-bold text-gray-800 text-lg mt-2">Rekap Tindak Lanjut & Kerugian Negara</h2>
             </div>
-            <p className="text-xs text-gray-400 ml-9">Jumlah Tindak Lanjut dan Kerugian Negara Kementrian Ketenagakerjaan</p>
+            <p className="text-xs text-gray-400 ">Jumlah Tindak Lanjut dan Kerugian Negara Kementrian Ketenagakerjaan</p>
           </div>
 
           <div className="h-[500px] w-full">

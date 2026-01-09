@@ -200,10 +200,12 @@ function IkpaPage() {
 
   return (
     <div>
-      <div className="flex justify-between items-center px-4 md:px-8 py-3 md:py-3 border-b border-gray-100 z-20 bg-white shrink-0 pl-20 md:pl-8 transition-all">
-        <h1 className="text-xl md:text-2xl font-bold text-gray-900"><Title>Indikator Kinerja Pelaksanaan Anggaran </Title></h1>
+      <div className="flex justify-between items-center px-4 md:px-4 border-b border-gray-100 z-20 bg-white shrink-0 pl-20 md:pl-8 transition-all">
         <div className="flex items-center">
-          <User
+          <Title>Indikator Kinerja Pelaksanaan Anggaran </Title>
+        </div>
+        <div className="w-auto">
+           <User
           name={userData?.name}
           previlege={userData?.role?.toUpperCase()}
           username={userData?.biro_code}

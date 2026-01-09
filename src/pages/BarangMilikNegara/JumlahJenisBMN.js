@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import User from "@/components/User";
-// TAMBAHAN: Import icon Menu dari lucide-react
 import { Menu } from "lucide-react";
+import Title from "@/components/Title";
 import { AppContext } from "@/contexts/AppContext";
 import { formatNumber } from "@/services/GeneralHelper";
 
 function JumlahJenisBMN() {
   const { setMobileMenuOpen } = useContext(AppContext);
 
-  // --- 1. DATA DUMMY (Eselon 1) ---
+  // ---  DATA DUMMY (Eselon 1) ---
   const eselonData = [
     { name: "Sekretariat Jenderal", value: 34722 },
     { name: "Inspektorat Jenderal", value: 1289 },
@@ -19,10 +19,10 @@ function JumlahJenisBMN() {
     { name: "Binalavotas", value: 19805 },
   ];
 
-  // --- 2. LIST JENIS BMN (15 Item) ---
+  // ---  LIST JENIS BMN  ---
   const jenisBMNList = [
     "Alat Angkutan Bermotor",
-    "Alat Angkutan Tidak Bermotor", 
+    "Alat Angkutan Tidak Bermotor",
     "Alat Berat",
     "Aset tak Berwujud",
     "Aset Tetap Lainnya",
@@ -31,14 +31,14 @@ function JumlahJenisBMN() {
     "Bangunan dan Gedung",
     "Instalasi dan Jaringan",
     "Jalan dan Jembatan",
-    "KDP", 
+    "KDP",
     "Mesin Peralatan Khusus TIK",
     "Mesin Peralatan non TIK",
     "Rumah Negara",
     "Tanah",
   ];
 
-  // --- 3. KOMPONEN KARTU KECIL ---
+  // ---  KOMPONEN KARTU KECIL ---
   const MiniTableCard = ({ title, data }) => (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col h-full hover:shadow-md transition-shadow duration-200">
       <div className="p-4 border-b border-gray-100 bg-gray-50/50">
@@ -74,34 +74,30 @@ function JumlahJenisBMN() {
   );
 
   return (
-    <div className="bg-gray-50 min-h-screen font-sans p-4 md:p-8">
-
-      {/* HEADER PAGE (Padding left mobile untuk menghindari tombol menu) */}
-      <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4 md:gap-0 pl-14 md:pl-0">
-        <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">
-          Barang Milik Negara
-        </h1>
-        <div className="self-end md:self-auto">
-           <User name={"Administrator"} previlege={"Administrator"} />
+    <div>
+      {/* HEADER PAGE*/}
+      <div className="flex justify-between items-center px-4 md:px-4 border-b border-gray-100 z-20 bg-white shrink-0 pl-20 md:pl-8 transition-all">
+        <div className="flex items-center">
+          <Title>Barang Milik Negara</Title>
+        </div>
+        <div className="w-auto">
+          <User name={"Administrator"} previlege={"Administrator"} />
         </div>
       </div>
 
-      {/* BLUE BANNER HEADER */}
-      <div className="w-full bg-[#40C4FF] text-white font-bold text-center py-3 rounded-lg shadow-sm mb-6 text-lg">
-        Jumlah Jenis BMN per Eselon 1
-      </div>
+      <div className="bg-gray-50 min-h-screen font-sans p-4 md:p-8">
+        {/* BLUE BANNER HEADER */}
+        <div className="w-full bg-[#40C4FF] text-white font-bold text-center py-3 rounded-lg shadow-sm mb-6 text-lg">
+          Jumlah Jenis BMN per Eselon 1
+        </div>
 
-      {/* GRID KARTU */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 pb-8">
-        {jenisBMNList.map((jenis, index) => (
-          <MiniTableCard 
-            key={index} 
-            title={jenis} 
-            data={eselonData} 
-          />
-        ))}
+        {/* GRID KARTU */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 pb-8">
+          {jenisBMNList.map((jenis, index) => (
+            <MiniTableCard key={index} title={jenis} data={eselonData} />
+          ))}
+        </div>
       </div>
-
     </div>
   );
 }

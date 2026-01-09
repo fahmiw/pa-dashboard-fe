@@ -4,7 +4,7 @@ import Paper from "@/components/Paper";
 import User from "@/components/User";
 import DonutChart from "./DonutChart";
 import { formatCurrency } from "@/services/GeneralHelper";
-import { Flame } from "lucide-react";
+import { Flame, BarChart3 } from "lucide-react";
 
 
 /* ================= DATA ================= */
@@ -39,20 +39,21 @@ const MultiSelect = ({ label, options, value, setValue }) => {
   };
 
   return (
-    <div ref={ref} className="relative min-w-[400px] min-h-[50px]">
+    <div ref={ref} className="relative w-full h-[50px]"> {/* min-w dihapus agar responsif */}
       <p className="absolute -top-2 left-2 bg-[#f8fafc] px-1 text-[10px] text-gray-400 uppercase font-bold z-10">{label}</p>
-      <div onClick={() => setOpen(!open)} className="min-h-[40px] flex flex-wrap items-center gap-2 border rounded-lg px-3 py-2.5 bg-white cursor-pointer shadow-sm">
-        {value.length === 0 ? <span className="text-gray-400 text-xs">Pilih {label}</span> : 
-          <div className="flex gap-1 overflow-hidden max-w-[300px]">
-            {value.slice(0, 2).map((item) => (
-              <span key={item} className="bg-sky-400 text-white px-2 py-1 rounded-full text-[15px] flex items-center gap-1 whitespace-nowrap">
-                {item} <button onClick={(e) => { e.stopPropagation(); toggle(item); }}>×</button>
+      <div onClick={() => setOpen(!open)} className="h-full flex items-center justify-between border rounded-lg px-3 bg-white cursor-pointer shadow-sm">
+        <div className="flex gap-1 overflow-hidden items-center max-w-[85%]">
+          {value.length === 0 ? <span className="text-gray-400 text-xs">Pilih {label}</span> : 
+            <>
+              {/* Di HP cuma tampil 1 tag agar tidak numpuk */}
+              <span className="bg-sky-400 text-white px-2 py-0.5 rounded-md text-[11px] md:text-xs whitespace-nowrap">
+                {value[0]}
               </span>
-            ))}
-            {value.length > 2 && <span className="text-[10px] text-gray-500 font-bold">+{value.length - 2}</span>}
-          </div>
-        }
-        <span className="ml-auto text-gray-400 text-[10px]">▼</span>
+              {value.length > 1 && <span className="text-[10px] text-gray-500 font-bold">+{value.length - 1}</span>}
+            </>
+          }
+        </div>
+        <span className="text-gray-400 text-[10px]">▼</span>
       </div>
       {open && (
         <div className="absolute z-[100] mt-1 w-full bg-white border rounded-lg shadow-xl max-h-48 overflow-auto">
@@ -110,9 +111,9 @@ export default function PNBP() {
   return (
     <>
       {/* HEADER */}
-      <div className="flex justify-between items-center px-6 border-b bg-white">
+      <div className="flex justify-between items-center px-4 md:px-4 border-b border-gray-100 z-20 bg-white shrink-0 pl-20 md:pl-8 transition-all">
         <Title>PTUK</Title>
-        <User />
+        <User name={"Test"} previlege={"Administrator"} />
       </div>
       {/* button  */}
       <div className="flex items-center gap-4 px-2 m-3">
@@ -166,7 +167,10 @@ export default function PNBP() {
    
 
         {/* CHART */}
-        <Paper>
+        <Paper className="relative">
+          <div className="absolute -top-5 left-6 w-10 h-10 rounded-full bg-[#ecfdf3] flex items-center justify-center text-[#bcdd51] shadow-sm border border-white">
+                 <BarChart3 size={20} />
+              </div>
           <div className="flex gap-12 px-8 py-3 w-full overflow-x-auto overflow-y-hidden">
             {[1, 2, 3, 4].map((i) => (
               <div
