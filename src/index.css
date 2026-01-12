@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Funnel Display";
+  src: url("/public/fonts/FunnelDisplay-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Funnel Display";
+  src: url("/public/fonts/FunnelDisplay-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Funnel Display";
+  src: url("/public/fonts/FunnelDisplay-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Funnel Display";
+  src: url("/public/fonts/FunnelDisplay-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Funnel Display";
+  src: url("/public/fonts/FunnelDisplay-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Funnel Display";
+  src: url("/public/fonts/FunnelDisplay-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  background: #f5f7fa;
+  margin: 0;
+  color: #2e3b4e;
+  font-family: "Funnel Display", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit; /* Inherit the default text color from parent (e.g., body) */
+  text-decoration: none; /* Optional: Remove underline */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/* .sidebar {
+  width: 200px;
+  font-size: 14px !important;
+  height: 100vh;
+  background: #15406a;
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+} */
+
+.sidebar-link {
+  display: block;
+  margin: 8px 0;
+  color: white;
+  text-decoration: none;
+  padding: 8px 1.5rem;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+  display: flex;
+  gap: 1rem;
+  place-items: center;
+}
+
+.sidebar-link:hover {
+  background: #59c7ff;
+}
+
+.sidebar-link.active {
+  font-weight: 900;
+  color: #59c7ff;
+  background: #fff;
+}
+
+.pdf-viewer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pdf-controls {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.logout-button {
+  margin-bottom: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+}
+
+.logout-button:hover {
+  background: #1d5c9c;
+}
+
+.pdf-document {
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+}
+
+.react-pdf__Page {
+  margin: 0 auto;
+}
+
+.react-pdf__Page__textContent,
+.react-pdf__Page__annotations {
+  display: none;
+}
+
+th .sort-icon {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+th:hover .sort-icon {
+  opacity: 1;
+}
+
+.sort-icon {
+  opacity: 0;
+}
+
+th:hover .sort-icon,
+.sort-icon-active {
+  opacity: 1 !important;
+}
+
+.dropdown-parent {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: backgroud 0.2 ease;
+}
+.dropdown-parent:hover {
+  background-color: #59c7ff;
+}
+.dropdown-parent.open {
+  background-color: #59c7ff;
+}
+
+.readonly-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.readonly-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+}
+.react-datepicker-wrapper {
+  display: inline-block !important;
+  width: auto !important;
+}
+
+.react-datepicker__input-container input {
+  width: 200px !important;
+  background-color: transparent !important;
+  border: 1px solid #ccc !important;
+  padding: 0.75rem !important;
+  border-radius: 4px !important;
+}
+iframe {
+  display: block !important;
+}
+
+/* tambah */

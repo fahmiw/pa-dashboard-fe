@@ -1,198 +1,259 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
+import React, { useContext } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+// import LoginPage from "./pages/LoginPage";
+import AppLayout from "./Layouts/AppLayout";
+import LoginPage from "./pages/LoginPage";
+import ListSatuanKerjaPage from "./pages/ListSatuankerja";
+import { ToastContainer } from "react-toastify";
+import CompilationPage from "./pages/Compilation";
+import SoonPage from "./pages/Soon";
+import "./index.css";
+import "react-toastify/dist/ReactToastify.css";
+import "react-datepicker/dist/react-datepicker.css";
+import UserManagementPage from "./pages/UserManagement";
+import MenuPage from "./pages/Menu";
+import { AppContext } from "./contexts/AppContext";
+import PrivateRoute from "./components/PrivateRoute";
+import DashboardPage from "./pages/Dashboard";
+import DashboardManagementPage from "./pages/DashboardManagement";
+import IkpaPage from "./pages/Ikpa";
+import PTUKSub1Page from "./pages/PTUKSub1";
+import MainDashboard from "./pages/MainDashboard";
+import BudgetExecution from "./pages/BudgetExecution";
+import StateProperty from "./pages/StateProperty";
+import TandaTerimaPage from "./pages/TandaTerima";
+import Administrator from "./pages/Administrator";
+import RealisasiPage from "./pages/Realisasi";
+import ReportingAccounting from "./pages/ReportingAccounting";
+import LLATPage from "./pages/LLAT";
+// import "@/PDFWorkerSetup";
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+function App() {
+  const { isAdmin, listMenu, userData } = useContext(AppContext);
+  const token = localStorage.getItem("token");
 
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-import { useState, useEffect, useMemo } from "react";
-
-// react-router components
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-
-// @mui material components
-import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import Icon from "@mui/material/Icon";
-
-// Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-
-// Material Dashboard 2 React example components
-import Sidenav from "examples/Sidenav";
-import Configurator from "examples/Configurator";
-
-// Material Dashboard 2 React themes
-import theme from "assets/theme";
-import themeRTL from "assets/theme/theme-rtl";
-
-// Material Dashboard 2 React Dark Mode themes
-import themeDark from "assets/theme-dark";
-import themeDarkRTL from "assets/theme-dark/theme-rtl";
-
-// RTL plugins
-import rtlPlugin from "stylis-plugin-rtl";
-import { CacheProvider } from "@emotion/react";
-import createCache from "@emotion/cache";
-
-// Material Dashboard 2 React routes
-import routes from "routes";
-
-// Material Dashboard 2 React contexts
-import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "context";
-
-// Images
-import brandWhite from "assets/images/logo-ct.png";
-import brandDark from "assets/images/logo-ct-dark.png";
-
-export default function App() {
-  const [controller, dispatch] = useMaterialUIController();
-  const {
-    miniSidenav,
-    direction,
-    layout,
-    openConfigurator,
-    sidenavColor,
-    transparentSidenav,
-    whiteSidenav,
-    darkMode,
-  } = controller;
-  const [onMouseEnter, setOnMouseEnter] = useState(false);
-  const [rtlCache, setRtlCache] = useState(null);
-  const { pathname } = useLocation();
-
-  // Cache for the rtl
-  useMemo(() => {
-    const cacheRtl = createCache({
-      key: "rtl",
-      stylisPlugins: [rtlPlugin],
-    });
-
-    setRtlCache(cacheRtl);
-  }, []);
-
-  // Open sidenav when mouse enter on mini sidenav
-  const handleOnMouseEnter = () => {
-    if (miniSidenav && !onMouseEnter) {
-      setMiniSidenav(dispatch, false);
-      setOnMouseEnter(true);
-    }
-  };
-
-  // Close sidenav when mouse leave mini sidenav
-  const handleOnMouseLeave = () => {
-    if (onMouseEnter) {
-      setMiniSidenav(dispatch, true);
-      setOnMouseEnter(false);
-    }
-  };
-
-  // Change the openConfigurator state
-  const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
-
-  // Setting the dir attribute for the body element
-  useEffect(() => {
-    document.body.setAttribute("dir", direction);
-  }, [direction]);
-
-  // Setting page scroll to 0 when changing the route
-  useEffect(() => {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-  }, [pathname]);
-
-  const getRoutes = (allRoutes) =>
-    allRoutes.map((route) => {
-      if (route.collapse) {
-        return getRoutes(route.collapse);
-      }
-
-      if (route.route) {
-        return <Route exact path={route.route} element={route.component} key={route.key} />;
-      }
-
-      return null;
-    });
-
-  const configsButton = (
-    <MDBox
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      width="3.25rem"
-      height="3.25rem"
-      bgColor="white"
-      shadow="sm"
-      borderRadius="50%"
-      position="fixed"
-      right="2rem"
-      bottom="2rem"
-      zIndex={99}
-      color="dark"
-      sx={{ cursor: "pointer" }}
-      onClick={handleConfiguratorOpen}
-    >
-      <Icon fontSize="small" color="inherit">
-        settings
-      </Icon>
-    </MDBox>
-  );
-
-  return direction === "rtl" ? (
-    <CacheProvider value={rtlCache}>
-      <ThemeProvider theme={darkMode ? themeDarkRTL : themeRTL}>
-        <CssBaseline />
-        {layout === "dashboard" && (
-          <>
-            <Sidenav
-              color={sidenavColor}
-              brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-              brandName="Arsip SP2D"
-              routes={routes}
-              onMouseEnter={handleOnMouseEnter}
-              onMouseLeave={handleOnMouseLeave}
-            />
-            <Configurator />
-            {configsButton}
-          </>
-        )}
-        {layout === "vr" && <Configurator />}
-        <Routes>
-          {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/satker" />} />
-        </Routes>
-      </ThemeProvider>
-    </CacheProvider>
-  ) : (
-    <ThemeProvider theme={darkMode ? themeDark : theme}>
-      <CssBaseline />
-      {layout === "dashboard" && (
-        <>
-          <Sidenav
-            color={sidenavColor}
-            brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-            brandName="Arsip SP2D"
-            routes={routes}
-            onMouseEnter={handleOnMouseEnter}
-            onMouseLeave={handleOnMouseLeave}
-          />
-          <Configurator />
-          {configsButton}
-        </>
-      )}
-      {layout === "vr" && <Configurator />}
+  return (
+    <>
+      <ToastContainer position="top-right" autoClose={2000} />
       <Routes>
-        {getRoutes(routes)}
-        <Route path="*" element={<Navigate to="/satker" />} />
+        <Route
+          path="/"
+          element={token ? <Navigate to="/dashboard" /> : <LoginPage />}
+        />
+        <Route
+          path="/satuan-kerja"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <MenuPage />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/dashboard-utama"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <MainDashboard />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/pelaksanaan-anggaran"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <BudgetExecution />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/barang-milik-negara"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <StateProperty />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/tata-usaha"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <Administrator />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        {listMenu.map((data) => (
+          <Route
+            key={data?.id}
+            path={`${data?.path}`}
+            element={
+              <PrivateRoute>
+                <AppLayout isAdmin={isAdmin}>
+                  <ListSatuanKerjaPage />
+                </AppLayout>
+              </PrivateRoute>
+            }
+          />
+        ))}
+        <Route
+          path="/satuan-kerja/:subPage"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <MenuPage />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        {listMenu.map((data) => (
+          <Route
+            key={data?.id}
+            path={(() => {
+              const pathParts = data.path.split("/").filter(Boolean);
+              const base = "/" + pathParts[0];
+              const end = pathParts.slice(1).join("/");
+              return `${base}/pengajuan/${end}`;
+            })()}
+            element={
+              <PrivateRoute>
+                <AppLayout isAdmin={isAdmin}>
+                  <ListSatuanKerjaPage />
+                </AppLayout>
+              </PrivateRoute>
+            }
+          />
+        ))}
+        <Route
+          path="/compilation"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <CompilationPage />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/user-management"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <UserManagementPage />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/soon"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <SoonPage />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <DashboardPage />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/dashboard/:subPage"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <DashboardPage />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/dashboard-management"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <DashboardManagementPage />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/ikpa"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <IkpaPage />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/realisasi"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <RealisasiPage />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/llat"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <LLATPage />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/tanda-terima"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <TandaTerimaPage />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/akuntansi-pelaporan"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <ReportingAccounting />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/ptuk/tuntutan-ganti-rugi"
+          element={
+            <PrivateRoute>
+              <AppLayout isAdmin={isAdmin}>
+                <PTUKSub1Page />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
       </Routes>
-    </ThemeProvider>
+    </>
   );
 }
+
+export default App;
